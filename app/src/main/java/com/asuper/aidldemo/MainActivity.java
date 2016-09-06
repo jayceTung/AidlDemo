@@ -61,4 +61,10 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         unbindService(connection);
     }
+
+    public void onBtn(View v) {
+        Intent intent = getIntent();
+        intent.setClass(this, SecActivity.class);
+        startActivity(intent);
+    }
 }
