@@ -7,6 +7,7 @@ import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Log.i(TAG, "onCreate");
         bindService();
         mTextView = (TextView) findViewById(R.id.text);
         mTextView.setOnClickListener(new View.OnClickListener() {
@@ -28,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 try {
                     String result = myAidlInterface.printAndroidAidl("MainActivity");
-                    Log.i(TAG, result);
+                    Snackbar.make(mTextView, result, Snackbar.LENGTH_SHORT).show();
                 } catch (RemoteException e) {
                     e.printStackTrace();
                 }
