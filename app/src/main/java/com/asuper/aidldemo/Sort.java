@@ -37,4 +37,8 @@ public class Sort {
 
         map = Collections.synchronizedMap(map);
     }
+
+    public static void getValue() {
+        System.out.print("getValue");
+    }
 }
