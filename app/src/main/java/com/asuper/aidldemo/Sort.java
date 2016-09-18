@@ -41,4 +41,8 @@ public class Sort {
     public static void getValue() {
         System.out.print("getValue");
     }
+
+    public synchronized void set(){
+
+    }
 }

@@ -8,4 +8,9 @@ public class SortChild extends Sort {
     public void get() {
         SortChild.getValue();
     }
+
+    @Override
+    public synchronized void set() {
+        super.set();
+    }
 }
