@@ -13,10 +13,21 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
+
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     private IMyAidlInterface myAidlInterface;
     private TextView mTextView;
+    private HttpConnectionUrlFactory factory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +48,28 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    URL url = new URL("http://ures.kktv8.com/kktv/activity/image/575/20130424151316_797.jpg!160");
+                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                    Log.i(TAG, "code = " + connection.getResponseCode());
+
+                    OkHttpClient client = new OkHttpClient();
+                    Request request = new Request.Builder()
+                            .url(url)
+                            .build();
+                    Response response = client.newCall(request).execute();
+                    Log.i(TAG, "okhttp code =" + response.code());
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 
     private void bindService() {
@@ -68,5 +101,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = getIntent();
         intent.setClass(this, SecActivity.class);
         startActivity(intent);
+    }
+
+    interface HttpConnectionUrlFactory {
+        HttpURLConnection build(URL url) throws IOException;
     }
 }
