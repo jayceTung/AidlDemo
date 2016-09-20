@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.asuper.library.BarrageView;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private IMyAidlInterface myAidlInterface;
     private TextView mTextView;
     private HttpConnectionUrlFactory factory;
+    private BarrageView view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
