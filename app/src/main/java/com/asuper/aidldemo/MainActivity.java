@@ -1,5 +1,6 @@
 package com.asuper.aidldemo;
 
+import android.animation.ObjectAnimator;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -7,12 +8,12 @@ import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.asuper.aidldemo.View.TipView;
 import com.asuper.library.BarrageView;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView mTextView;
     private HttpConnectionUrlFactory factory;
     private BarrageView view;
+    private TipView tipView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,12 +45,18 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 try {
                     String result = myAidlInterface.printAndroidAidl("MainActivity");
-                    Snackbar.make(mTextView, result, Snackbar.LENGTH_SHORT).show();
+//                    Snackbar.make(mTextView, result, Snackbar.LENGTH_SHORT).show();
+                    tipView.start();
+                    mTextView.setX(100);
+                    ObjectAnimator ani = ObjectAnimator.ofFloat(mTextView, "translationY", mTextView.getY(), mTextView.getY() + 100);
+                    ani.setDuration(100);
                 } catch (RemoteException e) {
                     e.printStackTrace();
                 }
             }
         });
+        tipView = (TipView) findViewById(R.id.tipView);
+
 
 
         new Thread(new Runnable() {

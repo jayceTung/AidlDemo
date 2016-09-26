@@ -22,4 +22,11 @@
         android:onClick="onBtn"
         android:layout_marginTop="100dp"
         android:layout_below="@id/text"/>
+
+    <com.asuper.aidldemo.View.TipView
+        android:id="@+id/tipView"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_alignParentBottom="true"
+        android:background="#000000"/>
 </RelativeLayout>
