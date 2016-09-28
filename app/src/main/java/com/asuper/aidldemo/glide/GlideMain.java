@@ -2,6 +2,7 @@ package com.asuper.aidldemo.glide;
 
 import java.util.ArrayDeque;
 import java.util.Queue;
+import java.util.concurrent.ArrayBlockingQueue;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -12,6 +13,10 @@ public class GlideMain {
 
     public static void main(String[] args) {
         Queue<String> queue = new ArrayDeque<String>();
+
+        Queue<String> stringQueue = new ArrayBlockingQueue<String>(120);
+        stringQueue.offer("add");
+        stringQueue.poll();
 
         /**
          * result
