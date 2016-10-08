@@ -40,11 +40,5 @@ public class GlideMain {
             isMe = true;
         }
         System.out.println(isMe);
-
-
-        /**
-         * match与find区别是 find是部分匹配 match是完全匹配
-         */
-
     }
 }
