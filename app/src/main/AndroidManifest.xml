@@ -20,6 +20,8 @@
         <activity
             android:name=".SecActivity"
             android:launchMode="singleTask"/>
+        <activity android:name=".View.TriActivity"
+                  android:screenOrientation="portrait"/>
 
         <service android:name=".MyService"
                  android:process=":remote">
