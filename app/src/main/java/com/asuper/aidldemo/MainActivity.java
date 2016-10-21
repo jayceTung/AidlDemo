@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.asuper.aidldemo.View.TipView;
+import com.asuper.aidldemo.actitvity.ToolBarActivity;
 import com.asuper.library.BarrageView;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -107,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onBtn(View v) {
         Intent intent = getIntent();
-        intent.setClass(this, SecActivity.class);
+        intent.setClass(this, ToolBarActivity.class);
         startActivity(intent);
     }
 
