@@ -18,7 +18,10 @@ public class QueueDemo {
         int count = 10;
         for (int i = 0; i < count; i++) {
             ReentrantLock lock = new ReentrantLock(false);
+
+            System.out.println("Fair = " + lock.isFair());
             lock.lock();
+            System.out.println("count = " + lock.getHoldCount());
             queue.offer(i);
             lock.unlock();
         }
