@@ -8,11 +8,18 @@ import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.support.v4.view.ViewCompat;
+import android.support.v4.view.ViewPropertyAnimatorListener;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.CycleInterpolator;
 import android.widget.TextView;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.asuper.aidldemo.View.TipView;
 import com.asuper.aidldemo.actitvity.ToolBarActivity;
 import com.asuper.library.BarrageView;
@@ -33,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
     private HttpConnectionUrlFactory factory;
     private BarrageView view;
     private TipView tipView;
+
+    private RequestQueue mReqQueue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +88,66 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }).start();
+
+
+        ViewCompat.animate(mTextView)
+                .setDuration(200)
+                .scaleX(0.9f)
+                .scaleY(0.9f)
+                .setInterpolator(new CycleInterpolator(1))
+                .setListener(new ViewPropertyAnimatorListener() {
+                    @Override
+                    public void onAnimationStart(final View view) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(final View view) {
+                        switch (view.getId()) {
+//                            case R.id.btn_horizontal_ntb:
+//                                startActivity(
+//                                        new Intent(MainActivity.this, HorizontalNtbActivity.class)
+//                                );
+//                                break;
+//                            case R.id.btn_horizontal_top_ntb:
+//                                startActivity(
+//                                        new Intent(MainActivity.this, TopHorizontalNtbActivity.class)
+//                                );
+//                                break;
+//                            case R.id.btn_vertical_ntb:
+//                                startActivity(
+//                                        new Intent(MainActivity.this, VerticalNtbActivity.class)
+//                                );
+//                                break;
+//                            case R.id.btn_samples_ntb:
+//                                startActivity(
+//                                        new Intent(MainActivity.this, SamplesNtbActivity.class)
+//                                );
+//                                break;
+                        }
+                    }
+
+                    @Override
+                    public void onAnimationCancel(final View view) {
+
+                    }
+                })
+                .withLayer()
+                .start();
+
+        mReqQueue = Volley.newRequestQueue(this);
+        mReqQueue.add(new StringRequest("http://www.baidu.com", new com.android.volley.Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.i(TAG, "onResponse = " + response.toString());
+            }
+        }, new com.android.volley.Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.i(TAG, "onErrorResponse = " + error.toString());
+            }
+        }));
+
     }
 
     private void bindService() {
@@ -115,4 +184,6 @@ public class MainActivity extends AppCompatActivity {
     interface HttpConnectionUrlFactory {
         HttpURLConnection build(URL url) throws IOException;
     }
+
+
 }

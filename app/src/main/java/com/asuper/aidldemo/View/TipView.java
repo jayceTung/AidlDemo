@@ -5,6 +5,11 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.LinearGradient;
+import android.graphics.Paint;
+import android.graphics.Shader;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -56,12 +61,10 @@ public class TipView extends RelativeLayout {
         mImageView.setImageResource(R.mipmap.kk_plugin_screen_red_dot);
 
         ObjectAnimator anim = ObjectAnimator
-                .ofFloat(mImageView, "zhy", 0F,  1.5F);
-        anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener()
-        {
+                .ofFloat(mImageView, "zhy", 0F, 1.5F);
+        anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
-            public void onAnimationUpdate(ValueAnimator animation)
-            {
+            public void onAnimationUpdate(ValueAnimator animation) {
 
                 float cVal = (Float) animation.getAnimatedValue();
                 Log.e(TAG, "cVal =" + cVal);
@@ -75,8 +78,6 @@ public class TipView extends RelativeLayout {
         anim.setDuration(500);
 
 
-
-
         ObjectAnimator animator = ObjectAnimator.ofFloat(mImageView, "DMC", 0.5f, 1.0f);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
@@ -86,7 +87,7 @@ public class TipView extends RelativeLayout {
                     mImageView.setImageResource(R.mipmap.bang_start_tip);
                 }
                 Log.e(TAG, "value =" + value);
-                if (value <=  0.6) {
+                if (value <= 0.6) {
                     mImageView.setY((value + 1) * (value + 1) * 200);
                     mImageView.setScaleX((float) (value + 0.4));
                     mImageView.setScaleY((float) (value + 0.4));
@@ -106,7 +107,7 @@ public class TipView extends RelativeLayout {
         repeatAnim.setRepeatMode(ValueAnimator.REVERSE);
         repeatAnim.setDuration(1000);
 
-        ObjectAnimator moveDown = ObjectAnimator.ofFloat(mImageView, "translationY", pointY -80, pointY);
+        ObjectAnimator moveDown = ObjectAnimator.ofFloat(mImageView, "translationY", pointY - 80, pointY);
         moveDown.setDuration(100);
 
         ObjectAnimator dismiss = ObjectAnimator.ofFloat(mImageView, "DMC", 1.0f, 0);
@@ -171,7 +172,7 @@ public class TipView extends RelativeLayout {
                 Log.e(TAG, "value =" + value);
                 mImageView.setScaleX(value);
                 mImageView.setScaleY(value);
-                if (value <=  0.5) {
+                if (value <= 0.5) {
                     mImageView.setY((float) ((value + 1.4) * (value + 1.4) * 200));
                 }
 
@@ -179,8 +180,6 @@ public class TipView extends RelativeLayout {
         });
         animator.setDuration(500);
         animator.start();
-
-
     }
 
     @Override
@@ -194,7 +193,14 @@ public class TipView extends RelativeLayout {
     }
 
     @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        return false;
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+        Paint paint = new Paint();
+        paint.setAntiAlias(true);
+        LinearGradient linearShader = new LinearGradient(0, 0, 100, 100,
+                new int[]{Color.RED, Color.BLACK, Color.BLUE, Color.DKGRAY},
+                null, Shader.TileMode.CLAMP);
+        paint.setShader(linearShader);
+        canvas.drawCircle(0, 0, 10, paint);
     }
 }
