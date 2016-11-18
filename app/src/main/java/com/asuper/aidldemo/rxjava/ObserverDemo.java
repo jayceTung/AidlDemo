@@ -5,7 +5,9 @@ import android.util.Log;
 import rx.Observable;
 import rx.Observer;
 import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by Super on 2016/10/20.
@@ -81,6 +83,20 @@ public class ObserverDemo {
     public void send() {
         observable.subscribe(observer);
         observable.subscribe(subscriber);
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .map(new Func1<String, Integer>() {
+                    @Override
+                    public Integer call(String s) {
+                        return Integer.valueOf(s);
+                    }
+                })
+                .filter(new Func1<Integer, Boolean>() {
+                    @Override
+                    public Boolean call(Integer integer) {
+                        return integer > 10;
+                    }
+                });
         Observable.just("1").map(new Func1<String, Object>() {
             @Override
             public Object call(String s) {

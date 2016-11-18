@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 
 /**
@@ -47,5 +48,10 @@ public class PaintView extends View {
 //        canvas.translate(0, 50);
 //        canvas.drawTextOnPath("你好",path, 10, 10, paint);
         canvas.restore();
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        return super.dispatchTouchEvent(event);
     }
 }
