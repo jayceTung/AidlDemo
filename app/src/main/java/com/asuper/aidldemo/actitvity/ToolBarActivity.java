@@ -56,6 +56,8 @@ public class ToolBarActivity extends AppCompatActivity {
             }
         });
 
+        getWindow().setBackgroundDrawable(null);
+
     }
 
     @Override
