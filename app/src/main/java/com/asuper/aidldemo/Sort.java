@@ -6,6 +6,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * Created by Super on 2016/9/8.
@@ -36,6 +37,9 @@ public class Sort {
         Map<User, String> map = new HashMap<User, String>();
 
         map = Collections.synchronizedMap(map);
+
+        String str = UUID.randomUUID().toString().replace("-", "");
+        System.out.println(str);
     }
 
     public static void getValue() {
