@@ -1,4 +1,4 @@
-package com.asuper.aidldemo.designmode;
+package com.asuper.aidldemo.designmode.Strategy;
 
 /**
  * Created by Super on 2016/12/1.
