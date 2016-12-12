@@ -1,14 +1,20 @@
 package com.asuper.aidldemo.actitvity;
 
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.asuper.aidldemo.R;
+import com.asuper.aidldemo.zxing.QRCodeUtil;
+
+import java.io.File;
 
 /**
  * Created by Super on 2016/10/21.
@@ -18,6 +24,7 @@ public class ToolBarActivity extends AppCompatActivity {
     private static final String TAG = "ToolBarActivity";
 
     private Toolbar mToolbar;
+    private ImageView mImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +64,28 @@ public class ToolBarActivity extends AppCompatActivity {
         });
 
         getWindow().setBackgroundDrawable(null);
+        mImageView = (ImageView) findViewById(R.id.image);
+        final String filePath = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator
+                + "qr_" + System.currentTimeMillis() + ".jpg";
+
+        //二维码图片较大时，生成图片、保存文件的时间可能较长，因此放在新线程中
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                boolean success = QRCodeUtil.createQRImage("www.baidu.com", 800, 800,
+                         BitmapFactory.decodeResource(getResources(), R.mipmap.bang_start_tip),
+                        filePath);
+
+                if (success) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            mImageView.setImageBitmap(BitmapFactory.decodeFile(filePath));
+                        }
+                    });
+                }
+            }
+        }).start();
 
     }
 
