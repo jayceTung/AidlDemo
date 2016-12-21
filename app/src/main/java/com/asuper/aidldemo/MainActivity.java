@@ -23,14 +23,15 @@ import com.android.volley.toolbox.Volley;
 import com.asuper.aidldemo.View.TipView;
 import com.asuper.aidldemo.actitvity.ToolBarActivity;
 import com.asuper.library.BarrageView;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.OkHttpClient;
+import okhttp3.ws.WebSocket;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private HttpConnectionUrlFactory factory;
     private BarrageView view;
     private TipView tipView;
+    private WebSocket mWebSocket;
 
     private RequestQueue mReqQueue;
 
@@ -67,6 +69,43 @@ public class MainActivity extends AppCompatActivity {
         });
         tipView = (TipView) findViewById(R.id.tipView);
 
+        OkHttpClient client = new OkHttpClient.Builder()
+                .readTimeout(3000, TimeUnit.SECONDS)
+                .writeTimeout(3000, TimeUnit.SECONDS)
+                .connectTimeout(3000, TimeUnit.SECONDS)
+                .build();
+
+//        Request request1 = new Request.Builder().url("ws://room117.kktv8.com:50003/").build();
+//        WebSocketCall call = WebSocketCall.create(client, request1);
+//        call.enqueue(new WebSocketListener() {
+//
+//            @Override
+//            public void onOpen(WebSocket webSocket, Response response) {
+//                Log.d(TAG, "onOpen Response = " + response.toString());
+//                mWebSocket = webSocket;
+//            }
+//
+//            @Override
+//            public void onFailure(IOException e, Response response) {
+//                Log.d(TAG, "onFailure Response = " + response.toString());
+//            }
+//
+//            @Override
+//            public void onMessage(ResponseBody message) throws IOException {
+//                Log.d(TAG, "ResponseBody = " + message.toString());
+//            }
+//
+//            @Override
+//            public void onPong(Buffer payload) {
+//
+//            }
+//
+//            @Override
+//            public void onClose(int code, String reason) {
+//
+//            }
+//        });
+
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -75,12 +114,7 @@ public class MainActivity extends AppCompatActivity {
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                     Log.i(TAG, "code = " + connection.getResponseCode());
 
-                    OkHttpClient client = new OkHttpClient();
-                    Request request = new Request.Builder()
-                            .url(url)
-                            .build();
-                    Response response = client.newCall(request).execute();
-                    Log.i(TAG, "okhttp code =" + response.code());
+
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
