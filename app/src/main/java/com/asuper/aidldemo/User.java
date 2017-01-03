@@ -8,6 +8,12 @@ import java.util.concurrent.ArrayBlockingQueue;
  */
 public class User {
     private Queue<String> queue = new ArrayBlockingQueue<String>(100);
+    private final BaiduMap map = new BaiduMap();
+
+    public BaiduMap getMap() {
+        return map;
+    }
+
     private String name;
     private Integer order;
     public String getName() {
@@ -21,5 +27,17 @@ public class User {
     }
     public void setOrder(Integer order) {
         this.order = order;
+    }
+
+    public static class BaiduMap {
+        private String name;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
     }
 }

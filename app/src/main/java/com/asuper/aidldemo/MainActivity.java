@@ -21,27 +21,28 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.asuper.aidldemo.View.TipView;
-import com.asuper.aidldemo.actitvity.ToolBarActivity;
+import com.asuper.aidldemo.socket.WebSocketClient;
 import com.asuper.library.BarrageView;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.concurrent.TimeUnit;
 
-import okhttp3.OkHttpClient;
 import okhttp3.ws.WebSocket;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+    implements WebSocketClient.SocketCallback {
     private static final String TAG = "MainActivity";
+
     private IMyAidlInterface myAidlInterface;
     private TextView mTextView;
     private HttpConnectionUrlFactory factory;
     private BarrageView view;
     private TipView tipView;
     private WebSocket mWebSocket;
+    private WebSocketClient mClient;
 
     private RequestQueue mReqQueue;
 
@@ -68,43 +69,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         tipView = (TipView) findViewById(R.id.tipView);
-
-        OkHttpClient client = new OkHttpClient.Builder()
-                .readTimeout(3000, TimeUnit.SECONDS)
-                .writeTimeout(3000, TimeUnit.SECONDS)
-                .connectTimeout(3000, TimeUnit.SECONDS)
-                .build();
-
-//        Request request1 = new Request.Builder().url("ws://room117.kktv8.com:50003/").build();
-//        WebSocketCall call = WebSocketCall.create(client, request1);
-//        call.enqueue(new WebSocketListener() {
-//
-//            @Override
-//            public void onOpen(WebSocket webSocket, Response response) {
-//                Log.d(TAG, "onOpen Response = " + response.toString());
-//                mWebSocket = webSocket;
-//            }
-//
-//            @Override
-//            public void onFailure(IOException e, Response response) {
-//                Log.d(TAG, "onFailure Response = " + response.toString());
-//            }
-//
-//            @Override
-//            public void onMessage(ResponseBody message) throws IOException {
-//                Log.d(TAG, "ResponseBody = " + message.toString());
-//            }
-//
-//            @Override
-//            public void onPong(Buffer payload) {
-//
-//            }
-//
-//            @Override
-//            public void onClose(int code, String reason) {
-//
-//            }
-//        });
 
         new Thread(new Runnable() {
             @Override
@@ -182,6 +146,10 @@ public class MainActivity extends AppCompatActivity {
             }
         }));
 
+        mClient = new WebSocketClient();
+        mClient.open("ws://room118.kktv8.com:50013/", this);
+
+
     }
 
     private void bindService() {
@@ -210,9 +178,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onBtn(View v) {
-        Intent intent = getIntent();
-        intent.setClass(this, ToolBarActivity.class);
-        startActivity(intent);
+//        Intent intent = getIntent();
+//        intent.setClass(this, ToolBarActivity.class);
+//        startActivity(intent);
+        String str = "{\"MsgTag\":10010372,\"total\":150,\"roomId\":113397036}";
+        mClient.sendMessage(str);
+    }
+
+    @Override
+    public void onMessage(String message) {
+        Log.d("WebSocketClient" , "Main onMessage = " + message);
+        mClient.close();
     }
 
     interface HttpConnectionUrlFactory {

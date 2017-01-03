@@ -35,6 +35,17 @@ public class SortChild extends Sort {
         public Info() {}
         String msg;
     }
+
+    private static void formatCount(String count) {
+        double num = Double.valueOf(count);
+        if (num >= 10000) {
+            num /= 10000;
+            System.out.println("format = " + String.format("%.1f", num));
+        } else {
+            System.out.println("format = " + count);
+        }
+    }
+
     public static void main(String[] args) {
         String gsonValue = "{name:'非子墨',age:23,info:{msg:'I am a student!'}}";
         Gson gson = new Gson() ;
@@ -42,6 +53,16 @@ public class SortChild extends Sort {
         String json = gson.toJson(user);
         System.out.println("user = "+user);
         System.out.println("json = " + json);
+
+//        int l = 10111;
+//        l /= 1;
+//        String.format("0.1%f", 1);
+//        System.out.println("format = " + l);
+        String d = "31415.926";
+        formatCount(d);
+        String mPhoneNum = "15990010346";
+        String num = mPhoneNum.replaceAll("(\\d{3})\\d{4}(\\d{4})","$1****$2");
+        System.out.print("mPhoneNum" + mPhoneNum + "num" + num);
 
         try {
             Constructor<?> con = Sort.class.getDeclaredConstructor();
