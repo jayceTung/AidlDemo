@@ -24,10 +24,48 @@ public class SortChild extends Sort {
         public String name;
         public int age;
         public Info info;
+        public String address;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public int getAge() {
+            return age;
+        }
+
+        public void setAge(int age) {
+            this.age = age;
+        }
+
+        public Info getInfo() {
+            return info;
+        }
+
+        public void setInfo(Info info) {
+            this.info = info;
+        }
+
+        public String getAddress() {
+            return address;
+        }
+
+        public void setAddress(String address) {
+            this.address = address;
+        }
+
         @Override
         public String toString() {
-            // TODO Auto-generated method stub
-            return "["+name+":"+info.msg+"]";
+            return "User{" +
+                    "name='" + name + '\'' +
+                    ", age=" + age +
+                    ", info=" + info +
+                    ", address='" + address + '\'' +
+                    '}';
         }
     }
 
@@ -48,10 +86,10 @@ public class SortChild extends Sort {
 
     public static void main(String[] args) {
         String gsonValue = "{name:'非子墨',age:23,info:{msg:'I am a student!'}}";
-        Gson gson = new Gson() ;
+        Gson gson = new Gson();
         User user = gson.fromJson(gsonValue, User.class);
         String json = gson.toJson(user);
-        System.out.println("user = "+user);
+        System.out.println("user = "+user.toString());
         System.out.println("json = " + json);
 
 //        int l = 10111;

@@ -17,11 +17,13 @@
         android:text="Hello World!"/>
 
     <Button
+        android:id="@+id/btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="onBtn"
-        android:layout_marginTop="100dp"
-        android:layout_below="@id/text"/>
+        android:layout_below="@id/text"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
 
     <com.asuper.aidldemo.View.TipView
         android:id="@+id/tipView"
@@ -29,4 +31,11 @@
         android:layout_height="300dp"
         android:layout_alignParentBottom="true"
         android:background="#000000"/>
+
+    <EditText
+        android:id="@+id/edit"
+        android:layout_width="100dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/btn"/>
 </RelativeLayout>

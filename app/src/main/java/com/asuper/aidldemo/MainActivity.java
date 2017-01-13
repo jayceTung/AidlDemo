@@ -14,12 +14,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.CycleInterpolator;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.asuper.aidldemo.NotificationUtil.NotificationUtil;
 import com.asuper.aidldemo.View.TipView;
 import com.asuper.aidldemo.socket.WebSocketClient;
 import com.asuper.library.BarrageView;
@@ -43,6 +45,7 @@ public class MainActivity extends AppCompatActivity
     private TipView tipView;
     private WebSocket mWebSocket;
     private WebSocketClient mClient;
+    private EditText edit;
 
     private RequestQueue mReqQueue;
 
@@ -53,6 +56,7 @@ public class MainActivity extends AppCompatActivity
         Log.i(TAG, "onCreate");
         bindService();
         mTextView = (TextView) findViewById(R.id.text);
+        edit = (EditText) findViewById(R.id.edit);
         mTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -149,6 +153,8 @@ public class MainActivity extends AppCompatActivity
         mClient = new WebSocketClient();
         mClient.open("ws://room118.kktv8.com:50013/", this);
 
+        NotificationUtil.createNotif(this, R.mipmap.ic_launcher, "12313", "12313", "12313");
+
 
     }
 
@@ -183,6 +189,7 @@ public class MainActivity extends AppCompatActivity
 //        startActivity(intent);
         String str = "{\"MsgTag\":10010372,\"total\":150,\"roomId\":113397036}";
         mClient.sendMessage(str);
+        mTextView.setText(edit.getText().toString());
     }
 
     @Override
