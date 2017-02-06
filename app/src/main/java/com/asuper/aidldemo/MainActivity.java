@@ -27,10 +27,16 @@ import com.asuper.aidldemo.socket.WebSocketClient;
 import com.asuper.library.BarrageView;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import okhttp3.ws.WebSocket;
 
 
@@ -156,6 +162,31 @@ public class MainActivity extends AppCompatActivity
         NotificationUtil.createNotif(this, R.mipmap.ic_launcher, "12313", "12313", "12313");
 
 
+        OkHttpClient okHttpClient = new OkHttpClient();
+        Request build = new Request.Builder().url("www.baidu.com").build();
+        Call call = okHttpClient.newCall(build);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, final Response response) throws IOException {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        InputStream inputStream = response.body().byteStream();
+                    }
+                });
+
+            }
+        });
+        try {
+            call.execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void bindService() {
