@@ -97,9 +97,8 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
                 .start();
 
 
-
         if (position < 3) {
-            ObjectAnimator moveAnimator =  ObjectAnimator.ofFloat(holder.mView, "translationY", 0f, -50f, 0f);
+            ObjectAnimator moveAnimator = ObjectAnimator.ofFloat(holder.mView, "translationY", 0f, -50f, 0f);
             moveAnimator.setInterpolator(new LinearInterpolator());
             moveAnimator.setDuration(100);
             moveAnimator.setStartDelay(800 + position * 80);

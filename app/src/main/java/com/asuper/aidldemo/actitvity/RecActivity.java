@@ -15,9 +15,8 @@ import com.asuper.aidldemo.View.GiftView;
  * Created by Super on 2017/2/21.
  */
 
-public class RecActivity extends AppCompatActivity implements RoomGesturer.GestureListener {
+public class RecActivity extends AppCompatActivity {
     private GiftView view;
-    private RoomGesturer mGesturer;
     private CountDownCircleView mCountView;
 
 
@@ -28,38 +27,6 @@ public class RecActivity extends AppCompatActivity implements RoomGesturer.Gestu
         view = (GiftView) findViewById(R.id.id_recycer_view_gift);
         mCountView = (CountDownCircleView) findViewById(R.id.id_count);
         mCountView.start(50);
-        mGesturer = new RoomGesturer(this, this);
-        view.setListener(new GiftView.RecyclerTouchListener() {
-            @Override
-            public void recyclerOnTouch(MotionEvent event) {
-                mGesturer.getGestureDetector().onTouchEvent(event);
-            }
-        });
-
-    }
-
-    @Override
-    public boolean onSingleTapUp() {
-        return false;
-    }
-
-    @Override
-    public void onLeftFling() {
-        view.setFling(true);
-    }
-
-    @Override
-    public void onRightFling() {
-        view.setFling(false);
-    }
-
-    @Override
-    public void onTopFling() {
-
-    }
-
-    @Override
-    public void onDownFling() {
 
     }
 

@@ -3,12 +3,14 @@ package com.asuper.aidldemo.View;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.support.annotation.Nullable;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.RelativeLayout;
 
 import com.asuper.aidldemo.R;
@@ -69,13 +71,30 @@ public class GiftView extends RelativeLayout {
         mRecyclerView.addItemDecoration(new SpaceItemDecoration(spacingInPixels));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.setOnTouchListener(new OnTouchListener() {
+//        mRecyclerView.setOnTouchListener(new OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                mListener.recyclerOnTouch(event);
+//                return false;
+//            }
+//        });
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                mListener.recyclerOnTouch(event);
-                return false;
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (dx >= 0) {
+                    setFling(true);
+                } else {
+                    setFling(false);
+                }
             }
         });
+
         setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
