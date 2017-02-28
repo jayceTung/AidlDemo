@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Super on 2016/9/8.
@@ -39,7 +40,12 @@ public class Sort {
         map = Collections.synchronizedMap(map);
 
         String str = UUID.randomUUID().toString().replace("-", "");
-        System.out.println(str);
+        System.out.println(TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()));
+        String str1 = "we are first";
+        String string = str1.intern();
+        System.out.print(string == str1);
+
+
     }
 
     public static void getValue() {
