@@ -15,4 +15,18 @@ public class LocalService extends Service {
     public IBinder onBind(Intent intent) {
         return null;
     }
+
+    public LocalService() {
+        super();
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
 }

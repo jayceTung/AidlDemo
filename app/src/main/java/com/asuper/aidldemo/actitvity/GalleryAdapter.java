@@ -73,7 +73,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Log.i("DMC", "onBindViewHolder");
+        Log.i("Super", "onBindViewHolder" + position);
         holder.mImg.setImageResource(mDatas.get(position));
         // 先进场再向上抖一下
 //            AnimatorSet animatorSet = new AnimatorSet();

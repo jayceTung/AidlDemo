@@ -1,40 +1,51 @@
 package com.asuper.aidldemo.actitvity;
 
-import android.animation.ObjectAnimator;
+import android.app.Application;
+import android.content.pm.ApplicationInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MotionEvent;
-import android.view.View;
+import android.util.Log;
 
 import com.asuper.aidldemo.R;
-import com.asuper.aidldemo.View.CountDownCircleView;
-import com.asuper.aidldemo.View.GiftView;
+import com.asuper.aidldemo.View.MemberListView;
+import com.asuper.aidldemo.parse.Util;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by Super on 2017/2/21.
  */
 
 public class RecActivity extends AppCompatActivity {
-    private GiftView view;
-    private CountDownCircleView mCountView;
+    private static final String TAG = "RecActivity";
 
+    private MemberListView mView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        Log.i(TAG, "onCreate");
+        Util.sysncIsDebug(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycler);
-        view = (GiftView) findViewById(R.id.id_recycer_view_gift);
-        mCountView = (CountDownCircleView) findViewById(R.id.id_count);
-        mCountView.start(50);
-
+        mView = (MemberListView) findViewById(R.id.id_room_list);
+        List<Integer> mData = new ArrayList<Integer>(Arrays.asList(R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher,
+                R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher));
+        mView.addList(mData);
+        Log.i(TAG, Util.isDebug.booleanValue() + "");
     }
 
-    public void onBtn(View v) {
-        view.initData();
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.i(TAG, "onStart");
     }
 
-    public void onHide(View v) {
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.i(TAG, "OnResume");
     }
 }

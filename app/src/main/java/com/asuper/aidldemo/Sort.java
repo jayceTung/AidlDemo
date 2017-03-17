@@ -1,5 +1,6 @@
 package com.asuper.aidldemo;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -13,6 +14,7 @@ import java.util.concurrent.TimeUnit;
  * Created by Super on 2016/9/8.
  */
 public class Sort {
+
 
     public static void main(String[] args) {
         User user1 = new User();
@@ -31,7 +33,7 @@ public class Sort {
                 return lhs.getOrder().compareTo(rhs.getOrder());
             }
         });
-        for(User u : list){
+        for (User u : list) {
             System.out.println(u.getName());
         }
 
@@ -43,7 +45,29 @@ public class Sort {
         System.out.println(TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()));
         String str1 = "we are first";
         String string = str1.intern();
-        System.out.print(string == str1);
+        System.out.println(1 & 0);
+        int[] fun ={0,1,2,3,4,5,6};
+        int[] ins = {7,8,9};
+        System.arraycopy(ins,0,fun,3,3);
+        for (int i : fun) {
+            System.out.print(i);
+        }
+
+//        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+//        try {
+//            System.out.println(bufferedReader.readLine());
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+
+        String string1 = "123456789";
+        StringBuffer stringBuffer = new StringBuffer(string1);
+        System.out.println(stringBuffer.reverse().toString());
+
+        int count = 12345678;
+        DecimalFormat format = new DecimalFormat("#.##");
+        double d = count / 10000.00;
+        System.out.println(format.format(d));
 
 
     }
@@ -52,7 +76,7 @@ public class Sort {
         System.out.print("getValue");
     }
 
-    public synchronized void set(){
+    public synchronized void set() {
 
     }
 }

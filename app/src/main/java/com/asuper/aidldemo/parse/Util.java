@@ -1,5 +1,9 @@
 package com.asuper.aidldemo.parse;
 
+import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.os.Debug;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -100,4 +104,20 @@ public class Util {
             list.add(parseJsonToObject(type, jsonArray.getJSONObject(i)));
         }
     }
+
+
+    public static Boolean isDebug = null;
+
+
+    public static boolean isDebug() {
+        return isDebug == null ? false : isDebug.booleanValue();
+    }
+
+    public static void sysncIsDebug(Context context) {
+        if (isDebug == null) {
+            isDebug = context.getApplicationInfo() != null &&
+                    (context.getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0;
+        }
+    }
+
 }
