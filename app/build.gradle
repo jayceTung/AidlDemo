@@ -1,5 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.antfortune.freeline'
+apply plugin: 'com.android.application'
+//添加如下代码，应用apt插件
+apply plugin: 'com.neenbedankt.android-apt'
 
 android {
     compileSdkVersion 23
@@ -69,4 +72,10 @@ dependencies {
     //eventbus
     compile 'org.greenrobot:eventbus:3.0.0'
     compile 'jp.wasabeef:recyclerview-animators:2.2.5'
+
+    //dagger
+    compile 'com.google.dagger:dagger:2.4'
+    apt 'com.google.dagger:dagger-compiler:2.4'
+    //java注解
+    compile 'org.glassfish:javax.annotation:10.0-b28'
 }
