@@ -69,6 +69,19 @@ public class Sort {
         double d = count / 10000.00;
         System.out.println(format.format(d));
 
+        System.out.print(getString());
+
+    }
+
+    static String getString(){
+        try{
+            return "SUCCESS";
+        }catch(Exception e){
+
+        }finally{
+            System.out.println("Finally is executing");
+            return "ERROR";//如果这句放在finally之外呢？
+        }
 
     }
 
