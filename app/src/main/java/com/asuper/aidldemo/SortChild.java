@@ -1,6 +1,7 @@
 package com.asuper.aidldemo;
 
 import com.google.gson.Gson;
+import com.google.zxing.aztec.encoder.Encoder;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -66,6 +67,11 @@ public class SortChild extends Sort {
                     ", info=" + info +
                     ", address='" + address + '\'' +
                     '}';
+        }
+
+        @Override
+        public int hashCode() {
+            return age + Encoder.DEFAULT_AZTEC_LAYERS;
         }
     }
 
