@@ -3,6 +3,7 @@ apply plugin: 'com.antfortune.freeline'
 apply plugin: 'com.android.application'
 //添加如下代码，应用apt插件
 apply plugin: 'com.neenbedankt.android-apt'
+apply from: 'tinkerpatch.gradle'
 
 android {
     compileSdkVersion 23
@@ -14,11 +15,17 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            manifestPlaceholders = [appName : "game"]
+        }
+        debug {
+            minifyEnabled false
+            manifestPlaceholders = [appName: "game"]
         }
     }
 }
@@ -78,4 +85,9 @@ dependencies {
     apt 'com.google.dagger:dagger-compiler:2.4'
     //java注解
     compile 'org.glassfish:javax.annotation:10.0-b28'
+    compile 'com.tencent.tinker:tinker-android-anno:1.6.2'
+    compile 'com.tencent.tinker:tinker-android-lib:1.6.2'
+
+    //crosswalk
+    compile 'org.xwalk:xwalk_core_library:18.48.477.13'
 }
