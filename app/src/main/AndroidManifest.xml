@@ -4,11 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
-        android:name=".App"
+        android:name=".app.Application"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="${appName}"
         android:supportsRtl="true"
+        android:hardwareAccelerated="true"
         android:theme="@style/Theme.AppCompat.NoActionBar"
         tools:replace="label">
         <activity
@@ -35,6 +36,10 @@
                 <action android:name="com.asuper.aidldemo.MyService"></action>
             </intent-filter>
         </service>
+
+        <meta-data
+            android:name="TINKER_ID"
+            android:value="tinker_id_100" />
     </application>
 
 
@@ -44,5 +49,9 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!-- 网络权限 -->
     <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
 </manifest>
