@@ -3,7 +3,7 @@ apply plugin: 'com.antfortune.freeline'
 apply plugin: 'com.android.application'
 //添加如下代码，应用apt插件
 apply plugin: 'com.neenbedankt.android-apt'
-apply from: 'tinkerpatch.gradle'
+//apply from: 'tinkerpatch.gradle'
 
 android {
     compileSdkVersion 23
@@ -38,7 +38,7 @@ dependencies {
     testCompile 'com.antfortune.freeline:runtime-no-op:0.8.1'
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.mcxiaoke.volley:library:1.0.15'
-    compile 'com.android.support:design:23.4.0'
+//    compile 'com.android.support:design:23.4.0'
 
     //add agera
     compile 'com.google.android.agera:content:1.1.0'
@@ -88,6 +88,5 @@ dependencies {
     compile 'com.tencent.tinker:tinker-android-anno:1.6.2'
     compile 'com.tencent.tinker:tinker-android-lib:1.6.2'
 
-    //crosswalk
-    compile 'org.xwalk:xwalk_core_library:18.48.477.13'
+    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha8'
 }
