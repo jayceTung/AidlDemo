@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +21,9 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.IOException;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -35,10 +37,17 @@ import okhttp3.Response;
 public class RecActivity extends BaseActivity {
     private static final String TAG = "RecActivity";
 
-    private TextView mTvText;
-    private Button mBt;
+//    private TextView mTvText;
+//    private Button mBt;
     private Button mBtTrue;
     private Button mBtFalse;
+
+    @BindView(R.id.tv_text)
+    TextView mTvText;
+    @BindView(R.id.bt_click)
+    Button mBt;
+
+    private Unbinder mUnbinder;
 
     long[] mHits = new long[10];
 
@@ -46,6 +55,9 @@ public class RecActivity extends BaseActivity {
         Log.i(TAG, "onCreate");
         Util.sysncIsDebug(this);
         super.onCreate(savedInstanceState);
+
+        mUnbinder = ButterKnife.bind(this);
+
         this.getWindow().setBackgroundDrawable(null);
 
         EventBus.getDefault().register(this);
@@ -97,6 +109,14 @@ public class RecActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         Log.i(TAG, "OnResume");
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (mUnbinder != null) {
+            mUnbinder.unbind();
+        }
+        super.onDestroy();
     }
 
     /**

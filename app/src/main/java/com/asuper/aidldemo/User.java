@@ -16,16 +16,34 @@ public class User {
 
     private String name;
     private Integer order;
+
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
+
     public Integer getOrder() {
         return order;
     }
+
     public void setOrder(Integer order) {
+        Class<?> clazz = order.getClass();
+        String className = clazz.getName();
+        try {
+            Class<?> cl = Class.forName(className);
+            Integer integer = (Integer) cl.newInstance();
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+
         this.order = order;
     }
 
