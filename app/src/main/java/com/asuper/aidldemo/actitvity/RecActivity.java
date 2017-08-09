@@ -3,21 +3,32 @@ package com.asuper.aidldemo.actitvity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.asuper.aidldemo.R;
-import com.asuper.aidldemo.View.MemberListView;
 import com.asuper.aidldemo.eventbus.MessageEvent;
+import com.asuper.aidldemo.okhttp.HeaderInterceptor;
+import com.asuper.aidldemo.okhttp.LoggerInterceptor;
 import com.asuper.aidldemo.parse.Util;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.io.IOException;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * Created by Super on 2017/2/21.
@@ -26,26 +37,66 @@ import java.util.List;
 public class RecActivity extends BaseActivity {
     private static final String TAG = "RecActivity";
 
-    private MemberListView mView;
+//    private TextView mTvText;
+//    private Button mBt;
+    private Button mBtTrue;
+    private Button mBtFalse;
 
-    @Override
+    @BindView(R.id.tv_text)
+    TextView mTvText;
+    @BindView(R.id.bt_click)
+    Button mBt;
+
+    private Unbinder mUnbinder;
+
+    long[] mHits = new long[10];
+
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         Log.i(TAG, "onCreate");
         Util.sysncIsDebug(this);
         super.onCreate(savedInstanceState);
+
+        mUnbinder = ButterKnife.bind(this);
+
+        this.getWindow().setBackgroundDrawable(null);
+
         EventBus.getDefault().register(this);
         setContentView(R.layout.activity_recycler);
-        mView = (MemberListView) findViewById(R.id.id_room_list);
-        List<Integer> mData = new ArrayList<Integer>(Arrays.asList(R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher,
-                R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher));
-        mView.addList(mData);
-        mView.setOnClickListener(new View.OnClickListener() {
+        Log.i(TAG, Util.isDebug.booleanValue() + "");
+
+        boolean matches = Patterns.WEB_URL.matcher("www.baidu.com").matches();
+
+        OkHttpClient client = new OkHttpClient().newBuilder()
+                .addInterceptor(new HeaderInterceptor())
+                .addInterceptor(new LoggerInterceptor()).build();
+        Request.Builder builder = new Request.Builder();
+        Request request = builder.url("http://www.baidu.com").build();
+        client.newCall(request).enqueue(new Callback() {
             @Override
-            public void onClick(View v) {
-                EventBus.getDefault().post(new MessageEvent("welcome"));
+            public void onFailure(Call call, IOException e) {
+                Log.d("Request", call.request().toString());
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                Log.d("Request", response.body().toString());
+                response.body().close();
             }
         });
-        Log.i(TAG, Util.isDebug.booleanValue() + "");
+
+        mTvText = (TextView) this.findViewById(R.id.tv_text);
+        mBt = (Button) this.findViewById(R.id.bt_click);
+        mBtTrue = (Button) this.findViewById(R.id.bt_true);
+        mBtFalse = (Button) this.findViewById(R.id.bt_false);
+
+        initView();
+    }
+
+    private void initView() {
+        mTvText.setText("");
+        mTvText.setVisibility(View.VISIBLE);
+        mBt.setText("点我一下试试");
+        mBt.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -58,6 +109,14 @@ public class RecActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         Log.i(TAG, "OnResume");
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (mUnbinder != null) {
+            mUnbinder.unbind();
+        }
+        super.onDestroy();
     }
 
     /**
