@@ -37,6 +37,8 @@
             </intent-filter>
         </service>
 
+        <service android:name=".Service.InnerService"/>
+
         <meta-data
             android:name="TINKER_ID"
             android:value="tinker_id_100" />
