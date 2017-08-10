@@ -1,5 +1,6 @@
 package com.asuper.aidldemo.actitvity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.asuper.aidldemo.R;
+import com.asuper.aidldemo.Service.InnerService;
 import com.asuper.aidldemo.eventbus.MessageEvent;
 import com.asuper.aidldemo.okhttp.HeaderInterceptor;
 import com.asuper.aidldemo.okhttp.LoggerInterceptor;
@@ -97,6 +99,14 @@ public class RecActivity extends BaseActivity {
         mTvText.setVisibility(View.VISIBLE);
         mBt.setText("点我一下试试");
         mBt.setVisibility(View.VISIBLE);
+        mBt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = getIntent();
+                intent.setClass(getApplicationContext(), InnerService.class);
+                startService(intent);
+            }
+        });
     }
 
     @Override
