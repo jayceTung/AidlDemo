@@ -1,4 +1,4 @@
-package com.asuper.aidldemo;
+package com.asuper.aidldemo.java;
 
 import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -34,13 +34,8 @@ public class User {
         String className = clazz.getName();
         try {
             Class<?> cl = Class.forName(className);
-            Integer integer = (Integer) cl.newInstance();
 
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
 

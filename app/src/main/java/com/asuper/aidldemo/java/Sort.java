@@ -1,4 +1,4 @@
-package com.asuper.aidldemo;
+package com.asuper.aidldemo.java;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -15,14 +15,12 @@ import java.util.concurrent.TimeUnit;
  */
 public class Sort {
 
-
     public static void main(String[] args) {
         User user1 = new User();
         user1.setName("a");
         user1.setOrder(1);
         User user2 = new User();
         user2.setName("b");
-        user2.setOrder(2);
         List<User> list = new ArrayList<User>();
         //此处add user2再add user1
         list.add(user2);
@@ -70,7 +68,6 @@ public class Sort {
         System.out.println(format.format(d));
 
         System.out.print(getString());
-
     }
 
     static String getString(){
