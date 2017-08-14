@@ -1,4 +1,4 @@
-package com.asuper.aidldemo;
+package com.asuper.aidldemo.java;
 
 import com.google.gson.Gson;
 import com.google.zxing.aztec.encoder.Encoder;
