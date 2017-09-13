@@ -90,4 +90,5 @@ dependencies {
 
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.jakewharton:butterknife:8.8.0'
+    compile 'com.joker.numtextview:app:1.0.1'
 }
