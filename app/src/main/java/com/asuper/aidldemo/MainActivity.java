@@ -23,7 +23,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.asuper.aidldemo.NotificationUtil.NotificationUtil;
 import com.asuper.aidldemo.View.TipView;
-import com.asuper.aidldemo.socket.WebSocketClient;
 import com.asuper.library.BarrageView;
 
 import java.io.IOException;
@@ -37,11 +36,9 @@ import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import okhttp3.ws.WebSocket;
 
 
-public class MainActivity extends AppCompatActivity
-    implements WebSocketClient.SocketCallback {
+public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
 
     private IMyAidlInterface myAidlInterface;
@@ -49,8 +46,6 @@ public class MainActivity extends AppCompatActivity
     private HttpConnectionUrlFactory factory;
     private BarrageView view;
     private TipView tipView;
-    private WebSocket mWebSocket;
-    private WebSocketClient mClient;
     private EditText edit;
 
     private RequestQueue mReqQueue;
@@ -156,8 +151,6 @@ public class MainActivity extends AppCompatActivity
             }
         }));
 
-        mClient = new WebSocketClient();
-        mClient.open("ws://room118.kktv8.com:50013/", this);
 
         NotificationUtil.createNotif(this, R.mipmap.ic_launcher, "12313", "12313", "12313");
 
@@ -219,14 +212,7 @@ public class MainActivity extends AppCompatActivity
 //        intent.setClass(this, ToolBarActivity.class);
 //        startActivity(intent);
         String str = "{\"MsgTag\":10010372,\"total\":150,\"roomId\":113397036}";
-        mClient.sendMessage(str);
         mTextView.setText(edit.getText().toString());
-    }
-
-    @Override
-    public void onMessage(String message) {
-        Log.d("WebSocketClient" , "Main onMessage = " + message);
-        mClient.close();
     }
 
     interface HttpConnectionUrlFactory {

@@ -4,6 +4,7 @@ import android.app.Application;
 import android.os.StrictMode;
 
 import com.antfortune.freeline.*;
+import com.od.core.rest.NetParams;
 
 /**
  * Created by Super on 2016/11/10.
@@ -33,5 +34,10 @@ public class App extends Application {
                     .penaltyDeath()
                     .build());
         }
+
+        NetParams.initInstance(new NetParams.Builder(getApplicationContext())
+                .isRelease(false)
+                .httpHost("http://www.kuaidi100.com")
+                .build());
     }
 }

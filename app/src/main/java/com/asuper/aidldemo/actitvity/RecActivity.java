@@ -15,7 +15,10 @@ import com.asuper.aidldemo.Service.InnerService;
 import com.asuper.aidldemo.eventbus.MessageEvent;
 import com.asuper.aidldemo.okhttp.HeaderInterceptor;
 import com.asuper.aidldemo.okhttp.LoggerInterceptor;
+import com.asuper.aidldemo.okhttp.service.KDBean;
+import com.asuper.aidldemo.okhttp.service.NetService;
 import com.asuper.aidldemo.parse.Util;
+import com.od.core.Rest;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -31,6 +34,9 @@ import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by Super on 2017/2/21.
@@ -105,6 +111,27 @@ public class RecActivity extends BaseActivity {
                 Intent intent = getIntent();
                 intent.setClass(getApplicationContext(), InnerService.class);
                 startService(intent);
+
+                Rest.getInstance().create(NetService.class)
+                        .getCountt("yuantong", "11111111111")
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Subscriber<KDBean>() {
+                            @Override
+                            public void onCompleted() {
+
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+                                Log.i(TAG, e.getMessage());
+                            }
+
+                            @Override
+                            public void onNext(KDBean kdBean) {
+                                mTvText.setText(kdBean.toString());
+                            }
+                        });
             }
         });
     }
