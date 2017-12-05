@@ -25,7 +25,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"/>
 
-    <com.asuper.aidldemo.View.TipView
+    <com.asuper.aidldemo.view.TipView
         android:id="@+id/tipView"
         android:layout_width="300dp"
         android:layout_height="300dp"

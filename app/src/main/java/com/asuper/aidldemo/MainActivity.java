@@ -22,7 +22,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.asuper.aidldemo.NotificationUtil.NotificationUtil;
-import com.asuper.aidldemo.View.TipView;
+import com.asuper.aidldemo.view.TipView;
 import com.asuper.library.BarrageView;
 
 import java.io.IOException;
