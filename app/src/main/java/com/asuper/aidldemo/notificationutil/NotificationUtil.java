@@ -1,4 +1,4 @@
-package com.asuper.aidldemo.NotificationUtil;
+package com.asuper.aidldemo.notificationutil;
 
 import android.app.Notification;
 import android.app.NotificationManager;

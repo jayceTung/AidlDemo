@@ -1,9 +1,12 @@
 package com.asuper.aidldemo.actitvity;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.util.Patterns;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -15,6 +18,8 @@ import com.asuper.aidldemo.okhttp.HeaderInterceptor;
 import com.asuper.aidldemo.okhttp.LoggerInterceptor;
 import com.asuper.aidldemo.parse.Util;
 import com.asuper.aidldemo.view.WaveView;
+import com.asuper.aidldemo.view.dispatchview.SuperView;
+import com.asuper.aidldemo.view.dispatchview.SuperViewGroup;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -49,6 +54,9 @@ public class RecActivity extends BaseActivity {
     Button mBt;
     @BindView(R.id.wv_circle)
     WaveView mCircle;
+    SuperView svView;
+    SuperViewGroup svgView;
+    private Handler mHandler = new Handler(Looper.getMainLooper());
 
     private Unbinder mUnbinder;
 
@@ -92,6 +100,8 @@ public class RecActivity extends BaseActivity {
         mBtTrue = (Button) this.findViewById(R.id.bt_true);
         mBtFalse = (Button) this.findViewById(R.id.bt_false);
         mCircle = (WaveView) this.findViewById(R.id.wv_circle);
+        svgView = (SuperViewGroup) this.findViewById(R.id.svg_group);
+        svView = (SuperView) this.findViewById(R.id.sv_view);
 
         initView();
     }
@@ -132,6 +142,12 @@ public class RecActivity extends BaseActivity {
                 mCircle.start();
             }
         });
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                Log.i("super", "thread name = " + Thread.currentThread().getName());
+            }
+        });
     }
 
     @Override
@@ -152,6 +168,18 @@ public class RecActivity extends BaseActivity {
             mUnbinder.unbind();
         }
         super.onDestroy();
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        Log.i("SuperActivity", "dispatchTouchEvent");
+        return super.dispatchTouchEvent(ev);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        Log.i("SuperActivity", "onTouchEvent");
+        return super.onTouchEvent(event);
     }
 
     /**
