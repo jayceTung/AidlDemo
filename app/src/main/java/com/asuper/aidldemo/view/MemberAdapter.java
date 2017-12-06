@@ -1,4 +1,4 @@
-package com.asuper.aidldemo.View;
+package com.asuper.aidldemo.view;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;

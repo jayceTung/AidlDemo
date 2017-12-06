@@ -1,24 +1,25 @@
 package com.asuper.aidldemo.actitvity;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.util.Patterns;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.asuper.aidldemo.R;
-import com.asuper.aidldemo.Service.InnerService;
 import com.asuper.aidldemo.eventbus.MessageEvent;
 import com.asuper.aidldemo.okhttp.HeaderInterceptor;
 import com.asuper.aidldemo.okhttp.LoggerInterceptor;
-import com.asuper.aidldemo.okhttp.service.KDBean;
-import com.asuper.aidldemo.okhttp.service.NetService;
 import com.asuper.aidldemo.parse.Util;
-import com.od.core.Rest;
+import com.asuper.aidldemo.view.WaveView;
+import com.asuper.aidldemo.view.dispatchview.SuperView;
+import com.asuper.aidldemo.view.dispatchview.SuperViewGroup;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -34,9 +35,6 @@ import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 /**
  * Created by Super on 2017/2/21.
@@ -54,6 +52,11 @@ public class RecActivity extends BaseActivity {
     TextView mTvText;
     @BindView(R.id.bt_click)
     Button mBt;
+    @BindView(R.id.wv_circle)
+    WaveView mCircle;
+    SuperView svView;
+    SuperViewGroup svgView;
+    private Handler mHandler = new Handler(Looper.getMainLooper());
 
     private Unbinder mUnbinder;
 
@@ -96,6 +99,9 @@ public class RecActivity extends BaseActivity {
         mBt = (Button) this.findViewById(R.id.bt_click);
         mBtTrue = (Button) this.findViewById(R.id.bt_true);
         mBtFalse = (Button) this.findViewById(R.id.bt_false);
+        mCircle = (WaveView) this.findViewById(R.id.wv_circle);
+        svgView = (SuperViewGroup) this.findViewById(R.id.svg_group);
+        svView = (SuperView) this.findViewById(R.id.sv_view);
 
         initView();
     }
@@ -108,30 +114,38 @@ public class RecActivity extends BaseActivity {
         mBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = getIntent();
-                intent.setClass(getApplicationContext(), InnerService.class);
-                startService(intent);
+//                Intent intent = getIntent();
+//                intent.setClass(getApplicationContext(), InnerService.class);
+//                startService(intent);
+//
+//                Rest.getInstance().create(NetService.class)
+//                        .getCountt("yuantong", "11111111111")
+//                        .subscribeOn(Schedulers.io())
+//                        .observeOn(AndroidSchedulers.mainThread())
+//                        .subscribe(new Subscriber<KDBean>() {
+//                            @Override
+//                            public void onCompleted() {
+//
+//                            }
+//
+//                            @Override
+//                            public void onError(Throwable e) {
+//                                Log.i(TAG, e.getMessage());
+//                            }
+//
+//                            @Override
+//                            public void onNext(KDBean kdBean) {
+//                                mTvText.setText(kdBean.toString());
+//                            }
+//                        });
 
-                Rest.getInstance().create(NetService.class)
-                        .getCountt("yuantong", "11111111111")
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new Subscriber<KDBean>() {
-                            @Override
-                            public void onCompleted() {
-
-                            }
-
-                            @Override
-                            public void onError(Throwable e) {
-                                Log.i(TAG, e.getMessage());
-                            }
-
-                            @Override
-                            public void onNext(KDBean kdBean) {
-                                mTvText.setText(kdBean.toString());
-                            }
-                        });
+                mCircle.start();
+            }
+        });
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                Log.i("super", "thread name = " + Thread.currentThread().getName());
             }
         });
     }
@@ -154,6 +168,18 @@ public class RecActivity extends BaseActivity {
             mUnbinder.unbind();
         }
         super.onDestroy();
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        Log.i("SuperActivity", "dispatchTouchEvent");
+        return super.dispatchTouchEvent(ev);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        Log.i("SuperActivity", "onTouchEvent");
+        return super.onTouchEvent(event);
     }
 
     /**

@@ -1,12 +1,10 @@
-package com.asuper.aidldemo.View;
+package com.asuper.aidldemo.view;
 
 import android.animation.ValueAnimator;
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Rect;
 import android.graphics.RectF;
 import android.support.annotation.Nullable;
 import android.text.TextPaint;

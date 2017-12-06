@@ -24,7 +24,7 @@
         <activity android:name=".SecActivity"
                   android:launchMode="singleTask"/>
 
-        <activity android:name=".View.TriActivity"
+        <activity android:name=".view.TriActivity"
                   android:screenOrientation="portrait"/>
 
         <activity android:name=".actitvity.ToolBarActivity"
