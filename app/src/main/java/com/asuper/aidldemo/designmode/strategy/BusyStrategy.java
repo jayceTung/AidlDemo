@@ -1,11 +1,10 @@
-package com.asuper.aidldemo.designmode.Strategy;
+package com.asuper.aidldemo.designmode.strategy;
 
 /**
  * Created by Super on 2016/12/1.
  */
 
-public class FreeStrategy implements BaseStrategy {
-
+public class BusyStrategy implements BaseStrategy {
 
     @Override
     public float execute(int km) {
@@ -16,6 +15,6 @@ public class FreeStrategy implements BaseStrategy {
         } else if (km >= 10) {
             return 3f;
         }
-        return 0f;
+        return 0;
     }
 }
