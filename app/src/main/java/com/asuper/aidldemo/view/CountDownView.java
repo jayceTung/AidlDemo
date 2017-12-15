@@ -32,12 +32,14 @@ public class CountDownView extends View {
     private static final String TEXT = " ";
     private static final int TEXT_COLOR = Color.BLACK;
 
+    private int mRadius;
     private int mBackgroundColor;
-    private float mBorderWidth;
+    private int mBorderWidth;
     private int mBorderColor;
     private String mText;
     private int mTextSize;
     private int mTextColor;
+    private int mRingRadius;
 
     private Paint mCirclePaint;
     private TextPaint mTextPaint;
@@ -57,6 +59,7 @@ public class CountDownView extends View {
     public CountDownView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.CountDownView);
+        mRadius = ta.getDimensionPixelSize(R.styleable.CountDownView_radius, dip2px(50));
         mBackgroundColor = ta.getInt(R.styleable.CountDownView_background_color, BACKGROUND_COLOR);
         mBorderWidth = ta.getDimensionPixelSize(R.styleable.CountDownView_border_width, dip2px(15));
         mBorderColor = ta.getInt(R.styleable.CountDownView_border_color, BORDER_COLOR);
@@ -66,11 +69,12 @@ public class CountDownView extends View {
         }
         mTextSize = ta.getDimensionPixelSize(R.styleable.CountDownView_text_size, dip2px(15));
         mTextColor = ta.getInt(R.styleable.CountDownView_text_color, TEXT_COLOR);
+        mRingRadius = mRadius + mBorderWidth / 2;
         ta.recycle();
-        initView();
+        initVariable();
     }
 
-    private void initView() {
+    private void initVariable() {
         mCirclePaint = new Paint();
         mCirclePaint.setAntiAlias(true);
         mCirclePaint.setDither(true);
@@ -118,11 +122,16 @@ public class CountDownView extends View {
         int height = getMeasuredHeight();
         int min = Math.min(width, height) / 2;
 
-        canvas.drawCircle(min, min, min - mBorderWidth, mCirclePaint);
+        canvas.drawCircle(min, min, mRadius, mCirclePaint);
 
-        RectF rectF = new RectF(0 + mBorderWidth, 0 + mBorderWidth, min * 2 - mBorderWidth,
-                min * 2 - mBorderWidth);
-        canvas.drawArc(rectF, -90f, mProgress, false, mBorderPaint);
+        if (mProgress > 0) {
+            RectF oval = new RectF();
+            oval.left = min - mRingRadius;
+            oval.top = min - mRingRadius;
+            oval.right = mRingRadius * 2 + (min - mRingRadius);
+            oval.bottom = mRingRadius * 2 + (min - mRingRadius);
+            canvas.drawArc(oval, -90f, mProgress, false, mBorderPaint);
+        }
 
         canvas.drawText(mText, min, min - mTextPaint.descent() + mTextPaint.getTextSize() / 2, mTextPaint);
         mStaticLayout.draw(canvas);

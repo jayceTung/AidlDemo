@@ -3,6 +3,7 @@
 
     <declare-styleable name="CountDownView">
         <attr name="background_color" format="color"/>
+        <attr name="radius" format="dimension"/>
         <attr name="border_color" format="color"/>
         <attr name="border_width" format="dimension"/>
         <attr name="text" format="string"/>
