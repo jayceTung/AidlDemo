@@ -13,15 +13,14 @@
         android:theme="@style/Theme.AppCompat.NoActionBar"
         tools:replace="android:theme, android:label">
         <activity
-            android:name=".actitvity.RecActivity">
+            android:name=".actitvity.ViewActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
 
-        <activity android:name=".SecActivity"
+        <activity android:name=".actitvity.RecActivity"
                   android:launchMode="singleTask"/>
 
         <activity android:name=".view.TriActivity"
