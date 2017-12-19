@@ -12,13 +12,24 @@
 
     <com.asuper.aidldemo.view.CountDownView
         android:id="@+id/cdv_view"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_centerInParent="true"
-        app:background_color="@color/colorAccent"
+        app:radius="25dp"
+        app:background_color="@color/kk_ffffff"
+        app:border_init_color="@color/kk_0e7dd1"
         app:border_width="3dp"
         app:border_color="@color/colorPrimary"
-        app:text_size="14sp"
+        app:text_size="22sp"
         app:text_color="@color/colorPrimary"/>
+
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:max="100"
+        android:progress="10"
+        android:progressDrawable="@drawable/progress_bar_drawable"/>
 
 </RelativeLayout>
