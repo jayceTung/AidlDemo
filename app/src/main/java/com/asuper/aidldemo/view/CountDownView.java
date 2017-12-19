@@ -34,16 +34,19 @@ public class CountDownView extends View {
 
     private int mRadius;
     private int mBackgroundColor;
+    private int mBorderInitColor;
     private int mBorderWidth;
     private int mBorderColor;
     private String mText;
     private int mTextSize;
     private int mTextColor;
     private int mRingRadius;
+    private Context mContext;
 
     private Paint mCirclePaint;
     private TextPaint mTextPaint;
     private Paint mBorderPaint;
+    private Paint mBorderInitPaint;
     private StaticLayout mStaticLayout;
     private float mProgress = 0;
     private CountDownTimer mTimer;
@@ -58,9 +61,11 @@ public class CountDownView extends View {
 
     public CountDownView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        mContext = context;
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.CountDownView);
         mRadius = ta.getDimensionPixelSize(R.styleable.CountDownView_radius, dip2px(50));
         mBackgroundColor = ta.getInt(R.styleable.CountDownView_background_color, BACKGROUND_COLOR);
+        mBorderInitColor = ta.getInt(R.styleable.CountDownView_border_init_color, BORDER_COLOR);
         mBorderWidth = ta.getDimensionPixelSize(R.styleable.CountDownView_border_width, dip2px(15));
         mBorderColor = ta.getInt(R.styleable.CountDownView_border_color, BORDER_COLOR);
         mText = ta.getString(R.styleable.CountDownView_text);
@@ -94,7 +99,13 @@ public class CountDownView extends View {
         mBorderPaint.setColor(mBorderColor);
         mBorderPaint.setStrokeWidth(mBorderWidth);
         mBorderPaint.setStyle(Paint.Style.STROKE);
-        mBorderPaint.setStrokeCap(Paint.Cap.ROUND);
+
+        mBorderInitPaint = new Paint();
+        mBorderInitPaint.setAntiAlias(true);
+        mBorderInitPaint.setDither(true);
+        mBorderInitPaint.setColor(mBorderInitColor);
+        mBorderInitPaint.setStrokeWidth(mBorderWidth);
+        mBorderInitPaint.setStyle(Paint.Style.STROKE);
 
         int width = (int) mTextPaint.measureText(mText.substring(0, (mText.length() + 1) / 2));
         mStaticLayout = new StaticLayout(mText, mTextPaint, width, Layout.Alignment.ALIGN_NORMAL,
@@ -123,15 +134,17 @@ public class CountDownView extends View {
         int min = Math.min(width, height) / 2;
 
         canvas.drawCircle(min, min, mRadius, mCirclePaint);
+        RectF oval = new RectF();
+        oval.left = min - mRingRadius;
+        oval.top = min - mRingRadius;
+        oval.right = mRingRadius * 2 + (min - mRingRadius);
+        oval.bottom = mRingRadius * 2 + (min - mRingRadius);
+        canvas.drawArc(oval, -90f, 360, false, mBorderInitPaint);
 
         if (mProgress > 0) {
-            RectF oval = new RectF();
-            oval.left = min - mRingRadius;
-            oval.top = min - mRingRadius;
-            oval.right = mRingRadius * 2 + (min - mRingRadius);
-            oval.bottom = mRingRadius * 2 + (min - mRingRadius);
             canvas.drawArc(oval, -90f, mProgress, false, mBorderPaint);
         }
+
 
         canvas.drawText(mText, min, min - mTextPaint.descent() + mTextPaint.getTextSize() / 2, mTextPaint);
         mStaticLayout.draw(canvas);
@@ -146,7 +159,13 @@ public class CountDownView extends View {
             @Override
             public void onTick(long millisUntilFinished) {
                 mProgress = ((millisInFuture - millisUntilFinished) / millisInFuture) * 360;
-                mText = String.valueOf((int) Math.ceil(millisUntilFinished / 1000d));
+                int second = (int) Math.ceil(millisUntilFinished / 1000d);
+                if (second > 3) {
+                    mBorderPaint.setColor(mBorderColor);
+                } else {
+                    mBorderPaint.setColor(mContext.getResources().getColor(R.color.kk_ff0000));
+                }
+                mText = String.valueOf(second);
                 invalidate();
             }
 
