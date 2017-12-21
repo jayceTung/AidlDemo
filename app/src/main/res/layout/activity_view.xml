@@ -32,4 +32,10 @@
         android:progress="10"
         android:progressDrawable="@drawable/progress_bar_drawable"/>
 
+    <com.asuper.aidldemo.view.MarqueeView
+        android:id="@+id/mv_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"/>
+
 </RelativeLayout>

@@ -151,6 +151,7 @@ public class CountDownView extends View {
     }
 
     public void start(final float millisInFuture) {
+        setVisibility(View.VISIBLE);
         if (mTimer != null) {
             mTimer.cancel();
             mTimer = null;
@@ -174,6 +175,7 @@ public class CountDownView extends View {
                 mProgress = 360;
                 mText = "0";
                 invalidate();
+                setVisibility(View.GONE);
             }
         }.start();
     }
@@ -182,6 +184,7 @@ public class CountDownView extends View {
         if (mTimer != null) {
             mTimer.cancel();
             mTimer = null;
+            setVisibility(View.GONE);
         }
     }
 
