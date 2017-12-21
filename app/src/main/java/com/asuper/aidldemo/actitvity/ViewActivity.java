@@ -6,6 +6,10 @@ import android.widget.Button;
 
 import com.asuper.aidldemo.R;
 import com.asuper.aidldemo.view.CountDownView;
+import com.asuper.aidldemo.view.MarqueeView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author super
@@ -15,6 +19,7 @@ public class ViewActivity extends BaseActivity {
 
     private CountDownView mCdcvView;
     private Button mStartBtn;
+    private MarqueeView marqueeView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,5 +37,104 @@ public class ViewActivity extends BaseActivity {
                 mCdcvView.start(10000);
             }
         });
+        List<String> list = new ArrayList<>();
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        list.add("得分点");
+        marqueeView = (MarqueeView) findViewById(R.id.mv_view);
+        marqueeView.addData(list);
+        marqueeView.startScroll();
     }
 }

@@ -23,5 +23,16 @@ public enum EnumTest {
         }
         System.out.println(EnumTest.FILE_EXIT.getDeclaringClass()
                 + "" + EnumTest.FILE_NOT_EXIST.getDeclaringClass());
+
+        for (int i = 0; i < 10; i++) {
+            System.out.println("isodd  =" + isOdd(i));
+        }
+    }
+
+    public static boolean isOdd(int a) {
+        if((a & 1) != 1){
+            return true;
+        }
+        return false;
     }
 }
