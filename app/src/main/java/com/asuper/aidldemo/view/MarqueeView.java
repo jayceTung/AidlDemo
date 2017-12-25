@@ -27,11 +27,11 @@ import java.util.List;
  */
 public class MarqueeView extends HorizontalScrollView implements Runnable{
 
-    private static final int TIME_COUNT = 5000;
+    private static final int TIME_COUNT = 6000;
 
     private Context context;
     private LinearLayout mainLayout;
-    private int scrollSpeed = 30;
+    private int scrollSpeed = 1;
     private int scrollDirection = RIGHT_TO_LEFT;
     private int currentX;
     private int viewMargin = dip2px(30);
@@ -40,6 +40,7 @@ public class MarqueeView extends HorizontalScrollView implements Runnable{
     private List<RelativeLayout> mList;
     private CountDownTimer mTimer;
     private boolean isStop = false;
+    private int winnerCount;
 
     public static final int LEFT_TO_RIGHT = 1;
     public static final int RIGHT_TO_LEFT = 2;
@@ -77,6 +78,9 @@ public class MarqueeView extends HorizontalScrollView implements Runnable{
             list = list.subList(0, 19);
         }
 
+        float count  = list.size();
+        scrollSpeed = (int) (1.2 / count * 10 + 1);
+
         if (mList == null) {
             mList = new ArrayList<>();
         }
@@ -100,6 +104,7 @@ public class MarqueeView extends HorizontalScrollView implements Runnable{
             LinearLayout.LayoutParams lpIv = new LinearLayout.LayoutParams(dip2px(90), dip2px(90));
             lpIv.gravity = Gravity.CENTER_HORIZONTAL;
             ImageView iv = new ImageView(context);
+            iv.setImageResource(R.mipmap.bang_start_tip);
             linearLayout.addView(iv, lpIv);
 
             LinearLayout.LayoutParams lpTv = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,
@@ -138,6 +143,7 @@ public class MarqueeView extends HorizontalScrollView implements Runnable{
                 stopScroll();
             }
         };
+        mTimer.start();
         post(this);
     }
 
@@ -146,7 +152,7 @@ public class MarqueeView extends HorizontalScrollView implements Runnable{
         removeCallbacks(this);
         if (mList != null && !mList.isEmpty()) {
             for (RelativeLayout view : mList) {
-                removeView(view);
+                mainLayout.removeView(view);
             }
             mList.clear();
         }
@@ -159,9 +165,6 @@ public class MarqueeView extends HorizontalScrollView implements Runnable{
         this.viewMargin = viewMargin;
     }
 
-    public void setScrollSpeed(int scrollSpeed){
-        this.scrollSpeed = scrollSpeed;
-    }
 
     public void setScrollDirection(int scrollDirection){
         this.scrollDirection = scrollDirection;
@@ -169,14 +172,14 @@ public class MarqueeView extends HorizontalScrollView implements Runnable{
 
     @Override
     public void run() {
-        Log.i("DMC", "currentX =" + currentX);
+        Log.i("DMC", "currentX =" + scrollSpeed);
         if (isStop) {
             return;
         }
         switch (scrollDirection){
             case LEFT_TO_RIGHT:
                 mainLayout.scrollTo(currentX, 0);
-                currentX --;
+                currentX -= 1;
 
                 if (-currentX >= screenWidth) {
 //                    mainLayout.scrollTo(viewWidth, 0);
@@ -187,7 +190,7 @@ public class MarqueeView extends HorizontalScrollView implements Runnable{
                 break;
             case RIGHT_TO_LEFT:
                 mainLayout.scrollTo(currentX, 0);
-                currentX ++;
+                currentX += 1;
 
                 if (currentX >= viewWidth) {
 //                    mainLayout.scrollTo(-screenWidth, 0);
@@ -200,7 +203,7 @@ public class MarqueeView extends HorizontalScrollView implements Runnable{
                 break;
         }
 
-        postDelayed(this, 50 / scrollSpeed);
+        postDelayed(this, scrollSpeed);
     }
 
     @Override
