@@ -10,6 +10,11 @@
         android:layout_height="wrap_content"
         android:text="开始" />
 
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@mipmap/bang_start_tip"/>
+
     <com.asuper.aidldemo.view.CountDownView
         android:id="@+id/cdv_view"
         android:layout_width="70dp"
@@ -36,6 +41,12 @@
         android:id="@+id/mv_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_view"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
         android:layout_centerInParent="true"/>
 
 </RelativeLayout>
