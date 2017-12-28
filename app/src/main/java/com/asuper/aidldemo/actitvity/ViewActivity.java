@@ -43,8 +43,8 @@ public class ViewActivity extends BaseActivity {
         final List<String> list = new ArrayList<>();
 
         list.add("得分点");
-        list.add("得分点");
-        list.add("得分点");
+
+
 
         marqueeView = (MarqueeView) findViewById(R.id.mv_view);
         mView.getChildCount();

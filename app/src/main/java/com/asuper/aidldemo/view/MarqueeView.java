@@ -9,8 +9,6 @@ import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.FrameLayout;
-import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -25,7 +23,7 @@ import java.util.List;
  * @author super
  * @date 2017/12/21
  */
-public class MarqueeView extends HorizontalScrollView implements Runnable{
+public class MarqueeView extends RelativeLayout implements Runnable{
 
     private static final int TIME_COUNT = 6000;
 
@@ -63,10 +61,11 @@ public class MarqueeView extends HorizontalScrollView implements Runnable{
     void initView() {
         WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
         screenWidth = wm.getDefaultDisplay().getWidth();
-        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT, dip2px(220));
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, dip2px(220));
         mainLayout = new LinearLayout(context);
         mainLayout.setOrientation(LinearLayout.HORIZONTAL);
-        this.addView(mainLayout, params);
+        mainLayout.setLayoutParams(params);
+        this.addView(mainLayout);
     }
 
     public void addData(List<String> list){
@@ -78,8 +77,7 @@ public class MarqueeView extends HorizontalScrollView implements Runnable{
             list = list.subList(0, 19);
         }
 
-        float count  = list.size();
-        scrollSpeed = (int) (1.2 / count * 10 + 1);
+        winnerCount = list.size();
 
         if (mList == null) {
             mList = new ArrayList<>();
@@ -179,7 +177,7 @@ public class MarqueeView extends HorizontalScrollView implements Runnable{
         switch (scrollDirection){
             case LEFT_TO_RIGHT:
                 mainLayout.scrollTo(currentX, 0);
-                currentX -= 1;
+                currentX -= 6;
 
                 if (-currentX >= screenWidth) {
 //                    mainLayout.scrollTo(viewWidth, 0);
@@ -190,7 +188,7 @@ public class MarqueeView extends HorizontalScrollView implements Runnable{
                 break;
             case RIGHT_TO_LEFT:
                 mainLayout.scrollTo(currentX, 0);
-                currentX += 1;
+                currentX += 6;
 
                 if (currentX >= viewWidth) {
 //                    mainLayout.scrollTo(-screenWidth, 0);
@@ -201,6 +199,16 @@ public class MarqueeView extends HorizontalScrollView implements Runnable{
                 break;
             default:
                 break;
+        }
+
+        if (winnerCount <= 5) {
+            scrollSpeed = 12;
+        } else if (winnerCount <= 10) {
+            scrollSpeed = 9;
+        } else if (winnerCount <= 15) {
+            scrollSpeed = 6;
+        } else {
+            scrollSpeed = 3;
         }
 
         postDelayed(this, scrollSpeed);
