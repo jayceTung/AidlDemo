@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#000000"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <Button
@@ -29,12 +30,14 @@
         app:text_color="@color/colorPrimary"/>
 
     <ProgressBar
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         style="?android:attr/progressBarStyleHorizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
         android:max="100"
-        android:progress="10"
+        android:progress="19"
         android:progressDrawable="@drawable/progress_bar_drawable"/>
 
     <com.asuper.aidldemo.view.MarqueeView

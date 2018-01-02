@@ -91,4 +91,7 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.8.0'
     compile 'com.joker.numtextview:app:1.0.1'
     compile 'com.od.network:core:1.0.0'
+
+    //wechat
+    compile 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
 }
