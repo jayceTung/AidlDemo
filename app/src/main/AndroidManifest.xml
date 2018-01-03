@@ -13,7 +13,7 @@
         android:theme="@style/Theme.AppCompat.NoActionBar"
         tools:replace="android:theme, android:label">
         <activity
-            android:name=".actitvity.ViewActivity">
+            android:name=".music.MusicActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
@@ -41,6 +41,7 @@
         <meta-data
             android:name="TINKER_ID"
             android:value="tinker_id_100" />
+        <service android:name=".music.MusicService"/>
     </application>
 
 
