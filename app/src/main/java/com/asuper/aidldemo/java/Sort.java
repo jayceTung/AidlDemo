@@ -3,7 +3,6 @@ package com.asuper.aidldemo.java;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,12 +24,12 @@ public class Sort {
         //此处add user2再add user1
         list.add(user2);
         list.add(user1);
-        Collections.sort(list, new Comparator<User>() {
-            @Override
-            public int compare(User lhs, User rhs) {
-                return lhs.getOrder().compareTo(rhs.getOrder());
-            }
-        });
+//        Collections.sort(list, new Comparator<User>() {
+//            @Override
+//            public int compare(User lhs, User rhs) {
+//                return lhs.getOrder().compareTo(rhs.getOrder());
+//            }
+//        });
         for (User u : list) {
             System.out.println(u.getName());
         }
@@ -62,12 +61,18 @@ public class Sort {
         StringBuffer stringBuffer = new StringBuffer(string1);
         System.out.println(stringBuffer.reverse().toString());
 
-        int count = 12345678;
+        float count = 12345678;
         DecimalFormat format = new DecimalFormat("#.##");
         double d = count / 10000.00;
         System.out.println(format.format(d));
 
         System.out.print(getString());
+        int num = 11;
+        double dd = num / count;
+        if (dd > 0 && dd < 1) {
+            System.out.print("true");
+        }
+        System.out.print(dd);
     }
 
     static String getString(){
