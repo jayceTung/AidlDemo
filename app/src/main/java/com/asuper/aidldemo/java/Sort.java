@@ -72,7 +72,11 @@ public class Sort {
         if (dd > 0 && dd < 1) {
             System.out.print("true");
         }
-        System.out.print(dd);
+        System.out.println(dd);
+
+        if (true && (true || false)) {
+            System.out.print("result");
+        }
     }
 
     static String getString(){
