@@ -6,13 +6,13 @@ apply plugin: 'com.neenbedankt.android-apt'
 //apply from: 'tinkerpatch.gradle'
 
 android {
-    compileSdkVersion 23
+    compileSdkVersion 25
     buildToolsVersion '25.0.0'
 
     defaultConfig {
         applicationId "com.asuper.aidldemo"
         minSdkVersion 16
-        targetSdkVersion 23
+        targetSdkVersion 25
         versionCode 1
         versionName "1.0"
 
@@ -36,7 +36,8 @@ dependencies {
     debugCompile 'com.antfortune.freeline:runtime:0.8.1'
     releaseCompile 'com.antfortune.freeline:runtime-no-op:0.8.1'
     testCompile 'com.antfortune.freeline:runtime-no-op:0.8.1'
-    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile 'com.android.support:support-annotations:25.4.0'
+    compile 'com.android.support:appcompat-v7:25.4.0'
     compile 'com.mcxiaoke.volley:library:1.0.15'
 //    compile 'com.android.support:design:23.4.0'
 
@@ -77,7 +78,7 @@ dependencies {
 
     //eventbus
     compile 'org.greenrobot:eventbus:3.0.0'
-    compile 'jp.wasabeef:recyclerview-animators:2.2.5'
+    compile 'jp.wasabeef:recyclerview-animators:2.2.7'
 
     //dagger
     compile 'com.google.dagger:dagger:2.4'
