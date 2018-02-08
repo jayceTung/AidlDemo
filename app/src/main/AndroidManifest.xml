@@ -36,7 +36,7 @@
             </intent-filter>
         </service>
 
-        <service android:name=".Service.InnerService"/>
+        <service android:name=".service.InnerService"/>
 
         <meta-data
             android:name="TINKER_ID"
@@ -46,7 +46,8 @@
 
 
     <!-- 挂载/卸载sd卡权限 -->
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
+        tools:ignore="ProtectedPermissions" />
     <!-- 写入外设的权限 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!-- 网络权限 -->
@@ -57,5 +58,6 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
 
 </manifest>
