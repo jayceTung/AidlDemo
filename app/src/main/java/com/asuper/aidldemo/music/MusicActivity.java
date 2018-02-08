@@ -8,6 +8,7 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.PowerManager;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
@@ -28,6 +29,7 @@ public class MusicActivity extends BaseActivity {
     private Button mBtnPlay;
     private TextView mTvMD5;
     private Activityrececier activityrececier;
+    private PowerManager.WakeLock wakeLock;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,6 +63,22 @@ public class MusicActivity extends BaseActivity {
                 mTvMD5.setText(MD5Util.getMD5());
             }
         });
+
+        wake();
+    }
+
+    private void wake() {
+        PowerManager power = (PowerManager) getSystemService(Context.POWER_SERVICE);
+        wakeLock = power.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, TAG);
+        wakeLock.acquire();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (wakeLock != null) {
+            wakeLock.release();
+        }
     }
 
     class Activityrececier extends BroadcastReceiver {

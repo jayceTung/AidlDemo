@@ -1,4 +1,4 @@
-package com.asuper.aidldemo.Service;
+package com.asuper.aidldemo.service;
 
 import android.app.IntentService;
 import android.content.Intent;
