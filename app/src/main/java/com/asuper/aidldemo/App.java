@@ -2,6 +2,7 @@ package com.asuper.aidldemo;
 
 import android.app.Application;
 import android.os.StrictMode;
+import android.util.Log;
 
 import com.antfortune.freeline.*;
 import com.od.core.rest.NetParams;
@@ -11,6 +12,7 @@ import com.od.core.rest.NetParams;
  */
 
 public class App extends Application {
+    private static final String TAG = "App";
 
     @Override
     public void onCreate() {
@@ -39,5 +41,17 @@ public class App extends Application {
                 .isRelease(false)
                 .httpHost("http://www.kuaidi100.com")
                 .build());
+    }
+
+    @Override
+    public void onLowMemory() {
+        Log.i(TAG, "onLowMemory");
+        super.onLowMemory();
+    }
+
+    @Override
+    public void onTrimMemory(int level) {
+        Log.i(TAG, "onTrimMemory");
+        super.onTrimMemory(level);
     }
 }

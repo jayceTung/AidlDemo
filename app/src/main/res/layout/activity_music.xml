@@ -26,6 +26,14 @@
         android:textSize="14sp"
         tools:text="这是demo这是demo这是demo这是demo"/>
 
+    <com.asuper.aidldemo.view.LayoutView
+        android:id="@+id/lv_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tv_md5"
+        app:layout_constraintLeft_toRightOf="parent"
+        app:layout_constraintRight_toLeftOf="parent"/>
+
 
 
 

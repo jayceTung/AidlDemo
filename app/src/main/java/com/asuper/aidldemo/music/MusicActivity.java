@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.asuper.aidldemo.R;
 import com.asuper.aidldemo.actitvity.BaseActivity;
+import com.asuper.aidldemo.view.LayoutView;
 
 
 /**
@@ -30,6 +31,7 @@ public class MusicActivity extends BaseActivity {
     private TextView mTvMD5;
     private Activityrececier activityrececier;
     private PowerManager.WakeLock wakeLock;
+    private LayoutView mLvLayout;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -65,6 +67,8 @@ public class MusicActivity extends BaseActivity {
         });
 
         wake();
+        mLvLayout = (LayoutView) findViewById(R.id.lv_layout);
+        mLvLayout.setData();
     }
 
     private void wake() {
@@ -79,6 +83,12 @@ public class MusicActivity extends BaseActivity {
         if (wakeLock != null) {
             wakeLock.release();
         }
+    }
+
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
     }
 
     class Activityrececier extends BroadcastReceiver {
