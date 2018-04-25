@@ -62,6 +62,7 @@ public class RecActivity extends BaseActivity {
 
     long[] mHits = new long[10];
 
+    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         Log.i(TAG, "onCreate");
         Util.sysncIsDebug(this);

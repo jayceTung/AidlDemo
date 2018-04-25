@@ -127,7 +127,7 @@ public class SortChild extends Sort {
             e.printStackTrace();
         }
 
-
-
+        Sort sort = new SortChild();
+        SortChild child = (SortChild) sort;
     }
 }
