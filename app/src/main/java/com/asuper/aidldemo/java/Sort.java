@@ -77,6 +77,8 @@ public class Sort {
         if (true && (true || false)) {
             System.out.print("result");
         }
+        MyProcess process = new MyProcess(new Tiger());
+        ((Animal)process.getProxy()).eat();
     }
 
     static String getString(){
