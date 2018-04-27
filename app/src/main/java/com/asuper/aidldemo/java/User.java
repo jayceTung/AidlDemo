@@ -53,4 +53,8 @@ public class User {
             this.name = name;
         }
     }
+
+    public void say() {
+        System.out.print("say");
+    }
 }
