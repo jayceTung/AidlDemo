@@ -17,9 +17,9 @@ public class MyProcess implements InvocationHandler {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        System.out.print("begin");
+        System.out.print("\nbegin");
         method.invoke(target, args);
-        System.out.print("end");
+        System.out.print("\nend");
         return null;
     }
 
