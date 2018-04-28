@@ -1,5 +1,6 @@
 package com.asuper.aidldemo.java;
 
+import java.io.FileNotFoundException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -79,6 +80,13 @@ public class Sort {
         }
         MyProcess process = new MyProcess(new Tiger());
         ((Animal)process.getProxy()).eat();
+        try {
+            ((Animal)process.getProxy()).say();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
     static String getString(){
