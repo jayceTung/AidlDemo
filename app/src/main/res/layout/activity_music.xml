@@ -34,6 +34,11 @@
         app:layout_constraintLeft_toRightOf="parent"
         app:layout_constraintRight_toLeftOf="parent"/>
 
+    <com.asuper.aidldemo.view.ArrowView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:color="@color/kk_red"
+        app:width="4dp"/>
 
 
 

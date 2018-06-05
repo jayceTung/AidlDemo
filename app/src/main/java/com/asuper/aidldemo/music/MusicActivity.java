@@ -69,6 +69,7 @@ public class MusicActivity extends BaseActivity {
         wake();
         mLvLayout = (LayoutView) findViewById(R.id.lv_layout);
         mLvLayout.setData();
+        mLvLayout.setVisibility(View.GONE);
     }
 
     private void wake() {
