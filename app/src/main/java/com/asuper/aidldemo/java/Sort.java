@@ -22,6 +22,8 @@ public class Sort {
         User user2 = new User();
         user2.setName("b");
         List<User> list = new ArrayList<User>();
+        List<? super User> list1 = new ArrayList<>();
+        list.add(user1);
         //此处add user2再add user1
         list.add(user2);
         list.add(user1);
