@@ -19,4 +19,10 @@ public interface PullToRefreshListener {
      * 刷新完成
      */
     void onFinishRefresh();
+
+    void onMax();
+
+    void onPullDown();
+
+    void onRise();
 }

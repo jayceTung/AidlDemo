@@ -63,4 +63,10 @@ public class UpdateView extends RelativeLayout {
             mDrawableLoading.stop();
         }
     }
+
+    public void setText(String text) {
+        if (mTvRefresh != null) {
+            mTvRefresh.setText(text);
+        }
+    }
 }

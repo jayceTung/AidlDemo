@@ -13,19 +13,24 @@ import com.asuper.aidldemo.R;
  * @date 2018/9/19
  */
 public class SunshineRefresh extends RefreshLayout {
+    private Context mContext;
+    private OnRefreshListener mListener;
+
+    public void setListener(OnRefreshListener listener) {
+        this.mListener = listener;
+    }
 
     public SunshineRefresh(Context context) {
-        super(context);
-        initSunshine();
+        this(context, null);
     }
 
     public SunshineRefresh(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        initSunshine();
+        this(context, attrs, 0);
     }
 
     public SunshineRefresh(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        mContext = context;
         initSunshine();
     }
 
@@ -40,6 +45,9 @@ public class SunshineRefresh extends RefreshLayout {
         setPullToRefreshListener(new PullToRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshLayout) {
+                if (mListener != null) {
+                    mListener.onRefresh();
+                }
                 sunshineView.startAnim();
                 sunshineView.postDelayed(new Thread(){
                     @Override
@@ -58,6 +66,21 @@ public class SunshineRefresh extends RefreshLayout {
             @Override
             public void onFinishRefresh() {
                 Log.e("SunshineRefresh","onFinishRefresh");
+            }
+
+            @Override
+            public void onMax() {
+                sunshineView.setText(mContext.getString(R.string.kk_refreshing));
+            }
+
+            @Override
+            public void onPullDown() {
+                sunshineView.setText(mContext.getString(R.string.pull_to_refresh));
+            }
+
+            @Override
+            public void onRise() {
+                sunshineView.setText(mContext.getString(R.string.pull_to_refresh));
             }
         });
     }

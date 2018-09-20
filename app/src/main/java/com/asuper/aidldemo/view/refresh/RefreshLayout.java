@@ -168,6 +168,9 @@ public class RefreshLayout extends FrameLayout {
                         mCurrentPos = dy * mResistance;
                         mCurrentPos = Math.max(0, mCurrentPos);
                         changeView(mCurrentPos);
+                        if (pullToRefreshListener != null) {
+                            pullToRefreshListener.onPullDown();
+                        }
                     } else {
                         mLastY = e.getY();
                         return super.dispatchTouchEvent(e);
@@ -177,13 +180,15 @@ public class RefreshLayout extends FrameLayout {
             case MotionEvent.ACTION_CANCEL:
             case MotionEvent.ACTION_UP:
                 if (mChildView != null) {
-                    if (mChildView.getTranslationY() >= mHeadHeight) {//手指松开后head达到刷新高度
+                    if (mChildView.getTranslationY() >= mHeadHeight && pullToRefreshListener != null) {//手指松开后head达到刷新高度
                         pullToRefreshListener.onStartRefresh();
                         mChildView.animate().translationY(mHeadHeight).start();
                         pullToRefreshListener.onRefresh(this);
                         isRefreshing = true;
-                    } else if (mChildView.getTranslationY() > 0)
+                        pullToRefreshListener.onMax();
+                    } else if (mChildView.getTranslationY() > 0) {
                         mChildView.animate().translationY(0).start();
+                    }
                 }
         }
         return super.dispatchTouchEvent(e);
@@ -279,7 +284,10 @@ public class RefreshLayout extends FrameLayout {
         if (mChildView != null) {
             mChildView.animate().translationY(0).start();
         }
-        pullToRefreshListener.onFinishRefresh();
+        if (pullToRefreshListener != null) {
+            pullToRefreshListener.onRise();
+            pullToRefreshListener.onFinishRefresh();
+        }
         isRefreshing = false;
     }
 }
