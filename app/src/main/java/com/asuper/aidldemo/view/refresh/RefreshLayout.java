@@ -45,7 +45,7 @@ public class RefreshLayout extends FrameLayout {
     /**
      * 阻尼系数，数字越大阻尼越小
      */
-    private float mResistance =0.7f;
+    private float mResistance =0.5f;
 
     /**
      * 头部最高允许的高度

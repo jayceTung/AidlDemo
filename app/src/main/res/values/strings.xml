@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">AidlDemo</string>
+    <string name="pull_to_refresh">下拉可以刷新</string>
+    <string name="release_to_refresh">松开即可刷新</string>
+    <string name="last_update">上次更新  <xliff:g>%s</xliff:g></string>
+    <string name="kk_refreshing">正在刷新...</string>
+    <string name="kk_window_toast">在直播间摔倒了要你的亲亲才能起来</string>
 </resources>

@@ -13,6 +13,7 @@ import com.asuper.aidldemo.R;
  * @date 2018/9/19
  */
 public class SunshineRefresh extends RefreshLayout {
+
     public SunshineRefresh(Context context) {
         super(context);
         initSunshine();
@@ -33,7 +34,7 @@ public class SunshineRefresh extends RefreshLayout {
         setHeadHeight(dip2px(getContext(), 80));
 
         final View headerView = LayoutInflater.from(getContext()).inflate(R.layout.view_header, null);
-        final SunshineView sunshineView  = (SunshineView) headerView.findViewById(R.id.sunshine);
+        final UpdateView sunshineView  = (UpdateView) headerView.findViewById(R.id.update);
         addHeadView(headerView);
 
         setPullToRefreshListener(new PullToRefreshListener() {
@@ -46,7 +47,7 @@ public class SunshineRefresh extends RefreshLayout {
                         finishRefreshing();
                         sunshineView.stopAnim();
                     }
-                },2000);
+                },1000);
             }
 
             @Override
@@ -59,7 +60,10 @@ public class SunshineRefresh extends RefreshLayout {
                 Log.e("SunshineRefresh","onFinishRefresh");
             }
         });
+    }
 
+    public interface OnRefreshListener {
+        void onRefresh();
     }
 
     /**

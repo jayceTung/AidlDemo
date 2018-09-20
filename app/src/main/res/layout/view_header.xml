@@ -7,9 +7,13 @@
     android:background="#6666"
     android:gravity="center">
 
-    <com.asuper.aidldemo.view.refresh.SunshineView
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:id="@+id/sunshine">
-    </com.asuper.aidldemo.view.refresh.SunshineView>
+    <!--<com.asuper.aidldemo.view.refresh.SunshineView-->
+        <!--android:layout_width="64dp"-->
+        <!--android:layout_height="64dp"-->
+        <!--android:id="@+id/sunshine">-->
+    <!--</com.asuper.aidldemo.view.refresh.SunshineView>-->
+    <com.asuper.aidldemo.view.refresh.UpdateView
+        android:id="@+id/update"
+        android:layout_width="match_parent"
+        android:layout_height="66dp"/>
 </LinearLayout>
