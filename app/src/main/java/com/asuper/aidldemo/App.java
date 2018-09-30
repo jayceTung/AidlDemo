@@ -1,11 +1,14 @@
 package com.asuper.aidldemo;
 
 import android.app.Application;
+import android.content.Context;
 import android.os.StrictMode;
 import android.util.Log;
 
-import com.antfortune.freeline.*;
+import com.antfortune.freeline.FreelineCore;
 import com.od.core.rest.NetParams;
+import com.squareup.leakcanary.LeakCanary;
+import com.squareup.leakcanary.RefWatcher;
 
 /**
  * Created by Super on 2016/11/10.
@@ -13,6 +16,13 @@ import com.od.core.rest.NetParams;
 
 public class App extends Application {
     private static final String TAG = "App";
+
+    public static RefWatcher getRefWatcher(Context context) {
+        App application = (App) context.getApplicationContext();
+        return application.refWatcher;
+    }
+
+    private RefWatcher refWatcher;
 
     @Override
     public void onCreate() {
@@ -41,6 +51,9 @@ public class App extends Application {
                 .isRelease(false)
                 .httpHost("http://www.kuaidi100.com")
                 .build());
+
+        refWatcher = LeakCanary.install(this);
+
     }
 
     @Override
