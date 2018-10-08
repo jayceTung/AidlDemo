@@ -9,6 +9,7 @@ import android.util.Patterns;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,6 +55,7 @@ public class RecActivity extends BaseActivity {
     Button mBt;
     @BindView(R.id.wv_circle)
     WaveView mCircle;
+    RelativeLayout mRootView;
     SuperView svView;
     SuperViewGroup svgView;
     private Handler mHandler = new Handler(Looper.getMainLooper());
@@ -149,6 +151,9 @@ public class RecActivity extends BaseActivity {
                 Log.i("super", "thread name = " + Thread.currentThread().getName());
             }
         });
+        mRootView = (RelativeLayout) findViewById(R.id.root_view);
+//        WaitViewController.from(mRootView).renderChilds();
+//        WaitViewController.from(mBt).render();
     }
 
     @Override
