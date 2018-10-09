@@ -53,6 +53,7 @@ public class App extends Application {
                 .build());
 
         refWatcher = LeakCanary.install(this);
+        MyCrashHandler.getInstance().init(this);
 
     }
 
