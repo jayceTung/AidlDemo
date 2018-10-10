@@ -23,6 +23,11 @@ public class InnerService extends IntentService {
     }
 
     @Override
+    public void onStart(@Nullable Intent intent, int startId) {
+        super.onStart(intent, startId);
+    }
+
+    @Override
     public int onStartCommand(@Nullable Intent intent, int flags, int startId) {
         Log.d(TAG, "onStartCommand id = " + startId);
         return super.onStartCommand(intent, flags, startId);
