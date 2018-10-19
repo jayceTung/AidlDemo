@@ -18,6 +18,7 @@ import com.asuper.aidldemo.eventbus.MessageEvent;
 import com.asuper.aidldemo.okhttp.HeaderInterceptor;
 import com.asuper.aidldemo.okhttp.LoggerInterceptor;
 import com.asuper.aidldemo.parse.Util;
+import com.asuper.aidldemo.view.DrawView;
 import com.asuper.aidldemo.view.WaveView;
 import com.asuper.aidldemo.view.dispatchview.SuperView;
 import com.asuper.aidldemo.view.dispatchview.SuperViewGroup;
@@ -58,6 +59,8 @@ public class RecActivity extends BaseActivity {
     RelativeLayout mRootView;
     SuperView svView;
     SuperViewGroup svgView;
+    DrawView drawView;
+    DrawView drawView2;
     private Handler mHandler = new Handler(Looper.getMainLooper());
 
     private Unbinder mUnbinder;
@@ -105,6 +108,8 @@ public class RecActivity extends BaseActivity {
         mCircle = (WaveView) this.findViewById(R.id.wv_circle);
         svgView = (SuperViewGroup) this.findViewById(R.id.svg_group);
         svView = (SuperView) this.findViewById(R.id.sv_view);
+        drawView = (DrawView) this.findViewById(R.id.draw);
+        drawView2 = (DrawView) this.findViewById(R.id.draw2);
 
         initView();
     }
@@ -142,7 +147,9 @@ public class RecActivity extends BaseActivity {
 //                            }
 //                        });
 
-                mCircle.start();
+//                mCircle.start();
+                drawView.start();
+                drawView2.start();
             }
         });
         mHandler.post(new Runnable() {
