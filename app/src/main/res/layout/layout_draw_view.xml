@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <com.asuper.aidldemo.view.DrawView
+        android:id="@+id/dv_1"
+        android:layout_width="95dp"
+        android:layout_height="115dp"/>
+
+    <com.asuper.aidldemo.view.DrawView
+        android:id="@+id/dv_2"
+        android:layout_width="95dp"
+        android:layout_height="115dp"
+        android:layout_toRightOf="@id/dv_1"/>
+
+    <com.asuper.aidldemo.view.DrawView
+        android:id="@+id/dv_3"
+        android:layout_width="95dp"
+        android:layout_height="115dp"
+        android:layout_toRightOf="@id/dv_2"/>
+
+    <com.asuper.aidldemo.view.DrawView
+        android:id="@+id/dv_4"
+        android:layout_width="95dp"
+        android:layout_height="115dp"
+        android:layout_below="@id/dv_1"/>
+
+    <com.asuper.aidldemo.view.DrawView
+        android:id="@+id/dv_5"
+        android:layout_width="95dp"
+        android:layout_height="115dp"
+        android:layout_toRightOf="@id/dv_4"
+        android:layout_below="@id/dv_2"/>
+
+    <com.asuper.aidldemo.view.DrawView
+        android:id="@+id/dv_6"
+        android:layout_width="95dp"
+        android:layout_height="115dp"
+        android:layout_toRightOf="@id/dv_5"
+        android:layout_below="@id/dv_3" />
+    
+    
+    <com.asuper.aidldemo.view.DrawView
+        android:id="@+id/dv_center"
+        android:layout_width="95dp"
+        android:layout_height="115dp"
+        android:visibility="invisible"
+        android:layout_centerInParent="true"/>
+    
+</RelativeLayout>
