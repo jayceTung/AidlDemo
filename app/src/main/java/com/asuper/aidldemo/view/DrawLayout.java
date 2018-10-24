@@ -54,14 +54,14 @@ public class DrawLayout extends LinearLayout {
 
     public void shuffle() {
         AnimatorSet animSet = new AnimatorSet();
-        animSet.playSequentially(getAniSet(mDv1), getAniSet(mDv2), getAniSet(mDv3), getAniSet(mDv4),
+        animSet.playTogether(getAniSet(mDv1), getAniSet(mDv2), getAniSet(mDv3), getAniSet(mDv4),
                 getAniSet(mDv5), getAniSet(mDv6));
         animSet.start();
     }
 
     public void deal() {
         AnimatorSet animSet = new AnimatorSet();
-        animSet.playSequentially(getAniSet2(mDv6, 6), getAniSet2(mDv5, 5),
+        animSet.playTogether(getAniSet2(mDv6, 6), getAniSet2(mDv5, 5),
                 getAniSet2(mDv4, 4), getAniSet2(mDv3, 3), getAniSet2(mDv2, 2), getAniSet2(mDv1, 1));
         animSet.start();
     }
