@@ -27,6 +27,11 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        //traceview 分析方法调用次数
+//        Debug.startMethodTracing("DMC_Trace");
+//        Debug.stopMethodTracing();
+
         FreelineCore.init(this);
 
         if (BuildConfig.DEBUG) {
