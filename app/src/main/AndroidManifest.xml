@@ -46,6 +46,10 @@
             android:name="TINKER_ID"
             android:value="tinker_id_100" />
         <service android:name=".music.MusicService"/>
+
+        <service
+            android:name=".scheduler.PollService"
+            android:permission="android.permission.BIND_JOB_SERVICE"/>
     </application>
 
 

@@ -1,5 +1,6 @@
 package com.asuper.aidldemo.actitvity;
 
+import android.content.ComponentName;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -18,6 +19,7 @@ import com.asuper.aidldemo.eventbus.MessageEvent;
 import com.asuper.aidldemo.okhttp.HeaderInterceptor;
 import com.asuper.aidldemo.okhttp.LoggerInterceptor;
 import com.asuper.aidldemo.parse.Util;
+import com.asuper.aidldemo.scheduler.PollService;
 import com.asuper.aidldemo.view.DrawLayout;
 import com.asuper.aidldemo.view.DrawView;
 import com.asuper.aidldemo.view.WaveView;
@@ -46,6 +48,8 @@ import okhttp3.Response;
 public class RecActivity extends BaseActivity {
     private static final String TAG = "RecActivity";
 
+    public static final int MSG_MES = 0x000001;
+
 //    private TextView mTvText;
 //    private Button mBt;
     private Button mBtTrue;
@@ -66,6 +70,9 @@ public class RecActivity extends BaseActivity {
     private Handler mHandler = new Handler(Looper.getMainLooper());
 
     private Unbinder mUnbinder;
+    private PollService mPollService;
+    private ComponentName mComponentName;
+    private int jobId;
 
     long[] mHits = new long[10];
 
