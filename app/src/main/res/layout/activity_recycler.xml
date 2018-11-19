@@ -120,6 +120,13 @@
                 android:layout_width="300dp"
                 android:layout_height="3000dp"
                 android:layout_centerInParent="true"/>
+
+            <com.asuper.aidldemo.view.LoadingAvatarView
+                android:id="@+id/lav_view"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:avatar_width="50dp"
+                android:layout_centerInParent="true"/>
         </RelativeLayout>
 
 

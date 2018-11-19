@@ -22,6 +22,7 @@ import com.asuper.aidldemo.parse.Util;
 import com.asuper.aidldemo.scheduler.PollService;
 import com.asuper.aidldemo.view.DrawLayout;
 import com.asuper.aidldemo.view.DrawView;
+import com.asuper.aidldemo.view.LoadingAvatarView;
 import com.asuper.aidldemo.view.WaveView;
 import com.asuper.aidldemo.view.dispatchview.SuperView;
 import com.asuper.aidldemo.view.dispatchview.SuperViewGroup;
@@ -67,6 +68,7 @@ public class RecActivity extends BaseActivity {
     DrawView drawView;
     DrawView drawView2;
     DrawLayout dl;
+    LoadingAvatarView mLAView;
     private Handler mHandler = new Handler(Looper.getMainLooper());
 
     private Unbinder mUnbinder;
@@ -120,6 +122,8 @@ public class RecActivity extends BaseActivity {
         drawView = (DrawView) this.findViewById(R.id.draw);
         drawView2 = (DrawView) this.findViewById(R.id.draw2);
         dl = (DrawLayout) this.findViewById(R.id.dl_layout);
+        mLAView = (LoadingAvatarView) this.findViewById(R.id.lav_view);
+        mLAView.setImage();
 
         initView();
     }

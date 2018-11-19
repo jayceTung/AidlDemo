@@ -16,4 +16,8 @@
         <attr name="width" format="dimension"/>
         <attr name="color" format="color"/>
     </declare-styleable>
+
+    <declare-styleable name="LoadingAvatarView">
+        <attr name="avatar_width" format="dimension"/>
+    </declare-styleable>
 </resources>
