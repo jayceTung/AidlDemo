@@ -127,9 +127,15 @@
                 android:layout_height="100dp"
                 app:avatar_width="50dp"
                 android:layout_centerInParent="true"/>
+
+            <com.asuper.aidldemo.view.LoopNewsView
+                android:id="@+id/lnv"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@color/kk_0e7dd1"
+                app:lnv_text_color="@color/kk_0B0022"
+                app:lnv_text_size="18sp"
+                app:lnv_tip_icon="@mipmap/bang_start_tip"/>
         </RelativeLayout>
-
-
-
     </com.asuper.aidldemo.view.refresh.SunshineRefresh>
 </RelativeLayout>

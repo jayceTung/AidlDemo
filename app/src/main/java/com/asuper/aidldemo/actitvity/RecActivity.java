@@ -23,6 +23,7 @@ import com.asuper.aidldemo.scheduler.PollService;
 import com.asuper.aidldemo.view.DrawLayout;
 import com.asuper.aidldemo.view.DrawView;
 import com.asuper.aidldemo.view.LoadingAvatarView;
+import com.asuper.aidldemo.view.LoopNewsView;
 import com.asuper.aidldemo.view.WaveView;
 import com.asuper.aidldemo.view.dispatchview.SuperView;
 import com.asuper.aidldemo.view.dispatchview.SuperViewGroup;
@@ -32,6 +33,8 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -124,6 +127,20 @@ public class RecActivity extends BaseActivity {
         dl = (DrawLayout) this.findViewById(R.id.dl_layout);
         mLAView = (LoadingAvatarView) this.findViewById(R.id.lav_view);
         mLAView.setImage();
+        LoopNewsView view = (LoopNewsView) this.findViewById(R.id.lnv);
+        List<String> list = new ArrayList<String>();
+        list.add("11111111111");
+        list.add("11111111112");
+        list.add("11111111113");
+        list.add("11111111114");
+        list.add("11111111115");
+        list.add("11111111116");
+        list.add("11111111117");
+        list.add("11111111118");
+        list.add("11111111119");
+        list.add("11111111121");
+        list.add("11111111131");
+        view.addData(list);
 
         initView();
     }
