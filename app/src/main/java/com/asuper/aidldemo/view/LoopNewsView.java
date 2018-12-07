@@ -9,11 +9,13 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.TranslateAnimation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.asuper.aidldemo.R;
@@ -25,9 +27,9 @@ import java.util.List;
  * @author super
  * @date 2018-12-04
  */
-public class LoopNewsView extends FrameLayout {
+public class LoopNewsView extends LinearLayout {
     private static final String TAG = "LoopNewsView";
-    private static final int ANIM_DELAYED_MILLIONS = 3 * 1000;
+    private static final int ANIM_DELAYED_MILLIONS = 5 * 1000;
     private static final int ANIM_DURATION = 1 * 1000;
 
     private Drawable mTipIcon;
@@ -41,6 +43,7 @@ public class LoopNewsView extends FrameLayout {
     private TextView mTvIn;
     private TextView mTvOut;
     private ImageView mIcon;
+    private FrameLayout mLayout;
     private Animation mAnimIn, mAnimOut;
 
     public void addData(List<String> list) {
@@ -56,7 +59,7 @@ public class LoopNewsView extends FrameLayout {
         setTip(mTvOut);
         updatePlayAnimation();
     }
-    
+
     public LoopNewsView(@NonNull Context context) {
         this(context, null);
     }
@@ -67,6 +70,7 @@ public class LoopNewsView extends FrameLayout {
 
     public LoopNewsView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        setOrientation(HORIZONTAL);
         parseAttrs(context, attrs);
         initTipFrame();
         initAnimation();
@@ -93,12 +97,22 @@ public class LoopNewsView extends FrameLayout {
     private void initTipFrame() {
         mList = new ArrayList<>();
         mIcon = newImageView();
-        mTvIn = newTextView();
-        mTvOut = newTextView();
-        addView(mTvIn);
-        addView(mTvOut);
         addView(mIcon);
 
+        mTvIn = newTextView();
+        mTvOut = newTextView();
+        addChildView(mTvIn);
+        addChildView(mTvOut);
+    }
+
+    private void addChildView(View view) {
+        if (mLayout == null) {
+            mLayout = new FrameLayout(getContext());
+            LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+            mLayout.setLayoutParams(params);
+            addView(mLayout);
+        }
+        mLayout.addView(view);
     }
 
     private void initAnimation() {
@@ -107,11 +121,21 @@ public class LoopNewsView extends FrameLayout {
         mAnimIn.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
-
             }
 
             @Override
             public void onAnimationEnd(Animation animation) {
+                if (curTipIndex % 2 == 0) {
+                    mTvOut.setFocusableInTouchMode(true);
+                    mTvOut.setFocusable(true);
+                    mTvOut.setSingleLine(true);
+                    mTvOut.setEllipsize(TextUtils.TruncateAt.MARQUEE);
+                } else {
+                    mTvIn.setFocusableInTouchMode(true);
+                    mTvIn.setFocusable(true);
+                    mTvIn.setSingleLine(true);
+                    mTvIn.setEllipsize(TextUtils.TruncateAt.MARQUEE);
+                }
                 updateTip();
             }
 
@@ -155,14 +179,14 @@ public class LoopNewsView extends FrameLayout {
             Log.i(TAG, "marginLeft = " + marginLeft);
         }
         TextView tv = new TextView(getContext());
-        LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT,
-                Gravity.CENTER_VERTICAL);
+        LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
         lp.setMargins(marginLeft, 0, 0, 0);
         tv.setLayoutParams(lp);
         tv.setCompoundDrawablePadding(10);
         tv.setGravity(Gravity.CENTER_VERTICAL);
-        tv.setMaxLines(1);
+        tv.setSingleLine(true);
         tv.setEllipsize(TextUtils.TruncateAt.MARQUEE);
+        tv.setHorizontallyScrolling(true);
         tv.setTextColor(mTextColor);
         tv.setTextSize(mTextSize);
         return tv;
@@ -170,9 +194,9 @@ public class LoopNewsView extends FrameLayout {
 
     private ImageView newImageView() {
         ImageView iv = new ImageView(getContext());
-        LayoutParams lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT,
-                Gravity.CENTER_VERTICAL);
-        iv.setBackground(mTipIcon);
+        LayoutParams lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+        lp.gravity = Gravity.CENTER_VERTICAL;
+        iv.setImageDrawable(mTipIcon);
         iv.setLayoutParams(lp);
         return iv;
     }
