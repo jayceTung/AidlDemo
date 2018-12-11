@@ -14,7 +14,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:lnv_text_color="@color/kk_0B0022"
         app:lnv_text_size="18sp"
-        app:lnv_tip_icon="@mipmap/bang_start_tip"/>
+        app:lnv_tip_icon="@mipmap/bang_start_tip"
+        android:visibility="gone"/>
 
     <TextView
         android:id="@+id/tv_view"
@@ -29,5 +30,14 @@
         app:layout_constraintTop_toTopOf="@id/lnv_view"
         app:layout_constraintLeft_toLeftOf="parent"
         />
+
+    <com.asuper.aidldemo.view.LoopView
+        android:id="@+id/lv_layout"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lv_text_color="@color/kk_0B0022"
+        app:lv_text_icon="@mipmap/bang_start_tip"
+        app:lv_text_size="18sp"/>
 
 </android.support.constraint.ConstraintLayout>

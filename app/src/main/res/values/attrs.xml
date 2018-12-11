@@ -26,4 +26,10 @@
         <attr name="lnv_text_size" format="dimension"/>
         <attr name="lnv_tip_icon" format="reference"/>
     </declare-styleable>
+
+    <declare-styleable name="LoopView">
+        <attr name="lv_text_color" format="color"/>
+        <attr name="lv_text_size" format="dimension"/>
+        <attr name="lv_text_icon" format="reference"/>
+    </declare-styleable>
 </resources>

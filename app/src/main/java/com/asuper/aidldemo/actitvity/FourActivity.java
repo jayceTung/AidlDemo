@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.asuper.aidldemo.R;
 import com.asuper.aidldemo.base.BaseActivity;
 import com.asuper.aidldemo.view.LoopNewsView;
+import com.asuper.aidldemo.view.LoopView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,5 +65,7 @@ public class FourActivity extends BaseActivity {
                 }
             }
         });
+        LoopView lv = (LoopView) this.findViewById(R.id.lv_layout);
+        lv.addData(list);
     }
 }
