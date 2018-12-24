@@ -101,7 +101,6 @@ public class LoopView extends LinearLayout {
             @Override
             public View makeView() {
                 TextView textView = new TextView(getContext());
-                textView.setSingleLine();
                 textView.setTextSize(mTextSize);//字号
                 textView.setTextColor(mTextColor);
                 textView.setEllipsize(TextUtils.TruncateAt.MARQUEE);
