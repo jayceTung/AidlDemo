@@ -1,5 +1,6 @@
 package com.asuper.aidldemo.actitvity;
 
+import android.app.ActivityManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -67,5 +68,8 @@ public class FourActivity extends BaseActivity {
         });
         LoopView lv = (LoopView) this.findViewById(R.id.lv_layout);
         lv.addData(list);
+
+        //进程优先级
+        int process = ActivityManager.RunningAppProcessInfo.IMPORTANCE_BACKGROUND;
     }
 }
