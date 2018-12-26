@@ -13,10 +13,10 @@
         android:theme="@style/Theme.AppCompat.NoActionBar"
         tools:replace="android:theme, android:label,android:allowBackup">
         <activity android:name=".actitvity.FourActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN"/>-->
+                <!--<category android:name="android.intent.category.LAUNCHER"/>-->
+            <!--</intent-filter>-->
         </activity>
         <activity
             android:name=".kotiln.MainActivity">
@@ -28,10 +28,10 @@
 
         <activity android:name=".actitvity.RecActivity"
                   android:launchMode="singleTask">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN"/>-->
-                <!--<category android:name="android.intent.category.LAUNCHER"/>-->
-            <!--</intent-filter>-->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
         <activity android:name=".view.TriActivity"
                   android:screenOrientation="portrait"/>
