@@ -5,15 +5,16 @@ apply plugin: 'com.android.application'
 //添加如下代码，应用apt插件
 apply plugin: 'com.neenbedankt.android-apt'
 //apply from: 'tinkerpatch.gradle'
+apply plugin: 'me.tatarka.retrolambda'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion '25.0.0'
+    compileSdkVersion 26
+    buildToolsVersion '26.0.3'
 
     defaultConfig {
         applicationId "com.asuper.aidldemo"
         minSdkVersion 16
-        targetSdkVersion 25
+        targetSdkVersion '26'
         versionCode 1
         versionName "1.0"
 
@@ -29,6 +30,12 @@ android {
             manifestPlaceholders = [appName: "game"]
         }
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
 }
 
 dependencies {
