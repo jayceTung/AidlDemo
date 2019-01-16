@@ -1,26 +1,18 @@
 package com.asuper.aidldemo.view;
 
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
 import android.content.Context;
-import android.content.res.TypedArray;
-import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.Gravity;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.AnimationUtils;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextSwitcher;
-import android.widget.TextView;
-import android.widget.ViewSwitcher;
+import android.widget.RelativeLayout;
 
 import com.asuper.aidldemo.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,17 +20,19 @@ import java.util.List;
  * @date 2018-12-11
  */
 public class LoopView extends LinearLayout {
-    private static final String TAG = "LoopView";
+    private static final int KEY_DELAY_TIME = 5 * 1000;
 
-    private int mTextColor;
-    private int mTextSize;
-    private Drawable mDrawable;
-    private ArrayList<String> mList = new ArrayList<>();
-    private int index = 0;//textview上下滚动下标
-    private Handler handler = new Handler();
-    private boolean isFlipping = false; // 是否启用预警信息轮播
-
-    private TextSwitcher mTsView;
+    private MarqueeTextView mTv1;
+    private MarqueeTextView mTv2;
+    private Handler handler;
+    private boolean isShow = false;
+    private int startY1, endY1, startY2, endY2;
+    private Runnable runnable;
+    private List<String> list;
+    private int position = 0;
+    private int offsetY = 100;
+    private boolean hasPostRunnable = false;
+    private RelativeLayout mLayout;
     private ImageView mIvIcon;
 
     public LoopView(Context context) {
@@ -52,129 +46,158 @@ public class LoopView extends LinearLayout {
     public LoopView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         setOrientation(HORIZONTAL);
-        initAttr(context, attrs);
         initView();
-    }
-
-    private void initAttr(Context context, AttributeSet attrs) {
-        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.LoopView);
-        if (ta == null) return;
-
-        for (int i = 0; i < ta.getIndexCount(); i++) {
-            int attr = ta.getIndex(i);
-            if (attr == R.styleable.LoopView_lv_text_color) {
-                mTextColor = ta.getColor(R.styleable.LoopView_lv_text_color, 0);
-            } else if (attr == R.styleable.LoopView_lv_text_size) {
-                mTextSize = ta.getDimensionPixelOffset(R.styleable.LoopView_lv_text_size, 1);
-            } else if (attr == R.styleable.LoopView_lv_text_icon) {
-                mDrawable = ta.getDrawable(R.styleable.LoopView_lv_text_icon);
-            }
-        }
-        ta.recycle();
     }
 
     private void initView() {
         mIvIcon = newImageView();
-        mTsView = newTextSwitcher();
+
+        mTv1 = newTvView();
+        mTv2 = newTvView();
+        mLayout = newRelativeLayout();
         addView(mIvIcon);
-        addView(mTsView);
+        addView(mLayout);
+
+        handler = new Handler();
+        runnable = new Runnable() {
+            @Override
+            public void run() {
+                isShow = !isShow;
+                if (position == list.size() - 1) {
+                    position = 0;
+                }
+
+                if (isShow) {
+                    mTv1.setText(list.get(position++));
+                    mTv2.setText(list.get(position));
+                } else {
+                    mTv2.setText(list.get(position++));
+                    mTv1.setText(list.get(position));
+                }
+
+                startY1 = isShow ? 0 : offsetY;
+                endY1 = isShow ? -offsetY : 0;
+                ObjectAnimator animator = ObjectAnimator.ofFloat(mTv1, "translationY", startY1, endY1).setDuration(500);
+                animator.addListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+                        if (startY1 == 0) {
+                            mTv1.stopScroll();
+                        }
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        if (startY1 > 0) {
+                            mTv1.startScroll();
+                        }
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {
+
+                    }
+                });
+                animator.start();
+
+
+                startY2 = isShow ? offsetY : 0;
+                endY2 = isShow ? 0 : -offsetY;
+                ObjectAnimator animator2 = ObjectAnimator.ofFloat(mTv2, "translationY", startY2, endY2).setDuration(500);
+                animator2.addListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+                        if (startY2 == 0) {
+                            mTv2.stopScroll();
+                        }
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        if (startY2 > 0) {
+                            mTv2.startScroll();
+                        }
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {
+
+                    }
+                });
+                animator2.start();
+
+                handler.postDelayed(runnable, KEY_DELAY_TIME);
+            }
+        };
     }
 
     private ImageView newImageView() {
         ImageView iv = new ImageView(getContext());
         LayoutParams lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         lp.gravity = Gravity.CENTER_VERTICAL;
-        iv.setImageDrawable(mDrawable);
+        iv.setImageResource(R.mipmap.bang_start_tip);
         iv.setLayoutParams(lp);
         return iv;
     }
 
-    private TextSwitcher newTextSwitcher() {
-        TextSwitcher ts = new TextSwitcher(getContext());
-        LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+    private RelativeLayout newRelativeLayout() {
+        RelativeLayout rl = new RelativeLayout(getContext());
+        LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+        params.gravity = Gravity.CENTER_VERTICAL;
+        rl.setLayoutParams(params);
+        rl.addView(mTv1);
+        rl.addView(mTv2);
+        return rl;
+    }
+
+    private MarqueeTextView newTvView() {
+        MarqueeTextView mtv = new MarqueeTextView(getContext());
+        LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
         lp.gravity = Gravity.CENTER_VERTICAL;
-        ts.setLayoutParams(lp);
-
-        ts.setInAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.slide_in_bottom));
-        ts.setOutAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.slide_out_top));
-        ts.setFactory(new ViewSwitcher.ViewFactory() {
-            @Override
-            public View makeView() {
-                TextView textView = new TextView(getContext());
-                textView.setTextSize(mTextSize);//字号
-                textView.setTextColor(mTextColor);
-                textView.setEllipsize(TextUtils.TruncateAt.MARQUEE);
-                textView.setSingleLine();
-                textView.setGravity(Gravity.CENTER);
-                FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
-                        ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-                params.gravity = Gravity.CENTER;
-                textView.setLayoutParams(params);
-                textView.setPadding(25, 0, 25, 0);
-                textView.setSelected(true);
-                return textView;
-            }
-        });
-        return ts;
+        mtv.setLayoutParams(lp);
+        mtv.setGravity(Gravity.CENTER_VERTICAL);
+        return mtv;
     }
 
-    private Runnable runnable = new Runnable() {
-        @Override
-        public void run() {
-            if (!isFlipping) {
-                return;
-            }
-            index++;
-            mTsView.setText(mList.get(index % mList.size()));
-            if (index == mList.size()) {
-                index = 0;
-            }
-            startFlipping();
-        }
-    };
-    //开启信息轮播
-    public void startFlipping() {
-        if (mList.size() > 1) {
-            handler.removeCallbacks(runnable);
-            isFlipping = true;
-            handler.postDelayed(runnable, 3000);
-        }
+    public List<String> getList() {
+        return list;
     }
-    //关闭信息轮播
-    public void stopFlipping() {
-        if (mList.size() > 1) {
-            isFlipping = false;
-            handler.removeCallbacks(runnable);
-        }
-    }
-    //设置数据
+
     public void addData(List<String> list) {
-        stopFlipping();
-        mList.clear();
-        mList.addAll(list);
-        if (mList.size() == 1) {
-            mTsView.setText(mList.get(0));
-            index = 0;
+        this.list = list;
+
+        //处理最后一条数据切换到第一条数据 太快的问题
+        if (list.size() > 1) {
+            list.add(list.get(0));
         }
-        if (mList.size() > 1) {
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    mTsView.setText(mList.get(0));
-                    index = 0;
-                }
-            }, 1000);
-            mTsView.setInAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.slide_in_bottom));
-            mTsView.setOutAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.slide_out_top));
-            startFlipping();
+        startScroll();
+    }
+
+    public void startScroll() {
+        mTv1.setText(list.get(0));
+        if (list.size() > 1) {
+            if(!hasPostRunnable) {
+                hasPostRunnable = true;
+                handler.post(runnable);
+            }
+        } else {
+            //只有一条数据不进行滚动
+            hasPostRunnable = false;
         }
     }
 
-    public void onResume() {
-        startFlipping();
-    }
-
-    public void onStop() {
-        stopFlipping();
+    public void stopScroll() {
+        handler.removeCallbacks(runnable);
+        hasPostRunnable = false;
     }
 }
