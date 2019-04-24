@@ -80,6 +80,13 @@ public class Sort {
         if (true && (true || false)) {
             System.out.print("result");
         }
+
+        float f = -1 - 4;
+        System.out.println("-------");
+        System.out.println(f);
+
+        List<String> list2 = new ArrayList<>();
+        String s = list2.remove(0);
         MyProcess process = new MyProcess(new Tiger());
         ((Animal)process.getProxy()).eat();
         try {
@@ -87,11 +94,6 @@ public class Sort {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
-        float f = -1 - 4;
-        System.out.println("-------");
-        System.out.println(f);
-
 
     }
 

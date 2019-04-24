@@ -4,6 +4,7 @@ import android.app.ActivityManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.asuper.aidldemo.R;
 import com.asuper.aidldemo.base.BaseActivity;
@@ -23,6 +24,8 @@ public class FourActivity extends BaseActivity {
     private LoopNewsView mLnvView;
     private MarqueeTextView mTvView;
     private Button mBtn;
+    private ImageView imageView;
+    private boolean isTune = true;
 
     @Override
     protected int getContentView() {
@@ -47,6 +50,7 @@ public class FourActivity extends BaseActivity {
         list.add("111111111311111111111111111311111111");
         mLnvView.addData(list);
 
+        imageView = (ImageView) this.findViewById(R.id.iv_image);
         mTvView = (MarqueeTextView) this.findViewById(R.id.tv_view);
         mTvView.setEllipsize(TextUtils.TruncateAt.MARQUEE);
         mTvView.setSingleLine(true);
@@ -58,12 +62,16 @@ public class FourActivity extends BaseActivity {
         mBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mTvView.hasFocus()) {
+                if (isTune) {
                     mTvView.setFocusableInTouchMode(false);
                     mTvView.setFocusable(false);
+                    imageView.setImageDrawable(getResources().getDrawable(R.mipmap.kk_refresh0));
+                    isTune = false;
                 } else {
                     mTvView.setFocusable(true);
                     mTvView.setFocusableInTouchMode(true);
+                    imageView.setImageDrawable(getResources().getDrawable(R.mipmap.bang_start_tip));
+                    isTune = true;
                 }
             }
         });
