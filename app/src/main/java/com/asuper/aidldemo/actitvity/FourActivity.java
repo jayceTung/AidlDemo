@@ -1,6 +1,7 @@
 package com.asuper.aidldemo.actitvity;
 
 import android.app.ActivityManager;
+import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -73,6 +74,8 @@ public class FourActivity extends BaseActivity {
                     imageView.setImageDrawable(getResources().getDrawable(R.mipmap.bang_start_tip));
                     isTune = true;
                 }
+                Intent intent = new Intent(FourActivity.this, OpenGLAcitivity.class);
+                startActivity(intent);
             }
         });
         LoopView lv = (LoopView) this.findViewById(R.id.lv_layout);

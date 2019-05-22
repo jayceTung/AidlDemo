@@ -115,6 +115,10 @@ dependencies {
     compile "org.jetbrains.anko:anko-recyclerview-v7:$anko_version"
     compile "org.jetbrains.anko:anko-coroutines:$anko_version"
     compile "org.jetbrains.anko:anko-sqlite:$anko_version"
+    compile 'tv.danmaku.ijk.media:ijkplayer-java:0.8.3'
+    compile 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.8.3'
+    compile 'tv.danmaku.ijk.media:ijkplayer-armv5:0.8.3'
+    compile 'tv.danmaku.ijk.media:ijkplayer-x86:0.8.3'
 
 //    compile 'android.arch.lifecycle:extensions:1.1.0'
 //    compile 'android.arch.lifecycle:viewmodel:1.1.0'

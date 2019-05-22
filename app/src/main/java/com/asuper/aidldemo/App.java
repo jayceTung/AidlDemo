@@ -2,7 +2,6 @@ package com.asuper.aidldemo;
 
 import android.app.Application;
 import android.content.Context;
-import android.os.StrictMode;
 import android.util.Log;
 
 import com.antfortune.freeline.FreelineCore;
@@ -34,23 +33,23 @@ public class App extends Application {
 
         FreelineCore.init(this);
 
-        if (BuildConfig.DEBUG) {
-            //针对线程策略1
-            StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
-                        .detectDiskReads()
-                        .detectDiskWrites()
-                        .detectNetwork()
-                        .penaltyLog()
-                        .build());
-
-            //针对VM策略
-            StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
-                    .detectLeakedSqlLiteObjects()
-                    .detectLeakedClosableObjects()
-                    .penaltyLog()
-                    .penaltyDeath()
-                    .build());
-        }
+//        if (BuildConfig.DEBUG) {
+//            //针对线程策略1
+//            StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
+//                        .detectDiskReads()
+//                        .detectDiskWrites()
+//                        .detectNetwork()
+//                        .penaltyLog()
+//                        .build());
+//
+//            //针对VM策略
+//            StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
+//                    .detectLeakedSqlLiteObjects()
+//                    .detectLeakedClosableObjects()
+//                    .penaltyLog()
+//                    .penaltyDeath()
+//                    .build());
+//        }
 
         NetParams.initInstance(new NetParams.Builder(getApplicationContext())
                 .isRelease(false)
