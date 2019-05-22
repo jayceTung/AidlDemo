@@ -24,6 +24,13 @@ public class App extends Application {
     private RefWatcher refWatcher;
 
     @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        //mei
+        xcrash.XCrash.init(this);
+    }
+
+    @Override
     public void onCreate() {
         super.onCreate();
 
@@ -58,7 +65,6 @@ public class App extends Application {
 
         refWatcher = LeakCanary.install(this);
         MyCrashHandler.getInstance().init(this);
-
     }
 
     @Override
