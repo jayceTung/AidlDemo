@@ -1,16 +1,19 @@
 package com.asuper.aidldemo.opengl;
 
 import android.content.Context;
-import android.content.res.AssetFileDescriptor;
 import android.graphics.SurfaceTexture;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.opengl.GLES11Ext;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
 import android.util.Log;
 import android.view.Surface;
+
+import com.asuper.aidldemo.R;
+import com.asuper.aidldemo.parse.Util;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -24,9 +27,8 @@ import javax.microedition.khronos.opengles.GL10;
  * @author super
  * @date 2019-04-28
  */
-public class SampleRender implements GLSurfaceView.Renderer
-        , SurfaceTexture.OnFrameAvailableListener, MediaPlayer.OnVideoSizeChangedListener {
-
+public class SampleRender implements GLSurfaceView.Renderer, SurfaceTexture.OnFrameAvailableListener,
+        MediaPlayer.OnVideoSizeChangedListener {
 
     private static final String TAG = "GLRenderer";
     private Context context;
@@ -61,9 +63,11 @@ public class SampleRender implements GLSurfaceView.Renderer
 
     private boolean updateSurface;
     private int screenWidth, screenHeight;
+    private String mVideoPath;
 
     public SampleRender(Context context, String videoPath) {
         this.context = context;
+        this.mVideoPath = videoPath;
         synchronized (this) {
             updateSurface = false;
         }
@@ -84,30 +88,30 @@ public class SampleRender implements GLSurfaceView.Renderer
 
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
-//        String vertexShader = ShaderUtils.readRawTextFile(context, R.raw.vetext_sharder);
-//        String fragmentShader = ShaderUtils.readRawTextFile(context, R.raw.fragment_sharder);
-//        programId = ShaderUtils.createProgram(vertexShader, fragmentShader);
-//        aPositionLocation = GLES20.glGetAttribLocation(programId, "aPosition");
-//
-//        uMatrixLocation = GLES20.glGetUniformLocation(programId, "uMatrix");
-//        uSTMMatrixHandle = GLES20.glGetUniformLocation(programId, "uSTMatrix");
-//        uTextureSamplerLocation = GLES20.glGetUniformLocation(programId, "sTexture");
-//        aTextureCoordLocation = GLES20.glGetAttribLocation(programId, "aTexCoord");
-//
-//
+        String vertexShader = Util.readRawTextFile(context, R.raw.vertex_shader);
+        String fragmentShader = Util.readRawTextFile(context, R.raw.fragment_shader);
+        programId = Util.createProgram(vertexShader, fragmentShader);
+        aPositionLocation = GLES20.glGetAttribLocation(programId, "aPosition");
+
+        uMatrixLocation = GLES20.glGetUniformLocation(programId, "uMatrix");
+        uSTMMatrixHandle = GLES20.glGetUniformLocation(programId, "uSTMatrix");
+        uTextureSamplerLocation = GLES20.glGetUniformLocation(programId, "sTexture");
+        aTextureCoordLocation = GLES20.glGetAttribLocation(programId, "aTexCoord");
+
+
         int[] textures = new int[1];
         GLES20.glGenTextures(1, textures, 0);
-//
+
         textureId = textures[0];
-//        GLES20.glBindTexture(GLES11Ext.GL_TEXTURE_EXTERNAL_OES, textureId);
-////        ShaderUtils.checkGlError("glBindTexture mTextureID");
-//   /*GLES11Ext.GL_TEXTURE_EXTERNAL_OES的用处？
-//      之前提到视频解码的输出格式是YUV的（YUV420p，应该是），那么这个扩展纹理的作用就是实现YUV格式到RGB的自动转化，
-//      我们就不需要再为此写YUV转RGB的代码了*/
-//        GLES20.glTexParameterf(GLES11Ext.GL_TEXTURE_EXTERNAL_OES, GLES20.GL_TEXTURE_MIN_FILTER,
-//                GLES20.GL_NEAREST);
-//        GLES20.glTexParameterf(GLES11Ext.GL_TEXTURE_EXTERNAL_OES, GLES20.GL_TEXTURE_MAG_FILTER,
-//                GLES20.GL_LINEAR);
+        GLES20.glBindTexture(GLES11Ext.GL_TEXTURE_EXTERNAL_OES, textureId);
+        Util.checkGlError("glBindTexture mTextureID");
+   /*GLES11Ext.GL_TEXTURE_EXTERNAL_OES的用处？
+      之前提到视频解码的输出格式是YUV的（YUV420p，应该是），那么这个扩展纹理的作用就是实现YUV格式到RGB的自动转化，
+      我们就不需要再为此写YUV转RGB的代码了*/
+        GLES20.glTexParameterf(GLES11Ext.GL_TEXTURE_EXTERNAL_OES, GLES20.GL_TEXTURE_MIN_FILTER,
+                GLES20.GL_NEAREST);
+        GLES20.glTexParameterf(GLES11Ext.GL_TEXTURE_EXTERNAL_OES, GLES20.GL_TEXTURE_MAG_FILTER,
+                GLES20.GL_LINEAR);
 
         surfaceTexture = new SurfaceTexture(textureId);
         surfaceTexture.setOnFrameAvailableListener(this);//监听是否有新的一帧数据到来
@@ -120,15 +124,11 @@ public class SampleRender implements GLSurfaceView.Renderer
     private void initMediaPlayer() {
         mediaPlayer = new MediaPlayer();
         try {
-            AssetFileDescriptor afd = context.getAssets().openFd("simple_anim.mp4");
-            mediaPlayer.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
-//            String path = "http://192.168.1.254:8192";
-//            mediaPlayer.setDataSource(path);
-//            mediaPlayer.setDataSource(TextureViewMediaActivity.videoPath);
+            mediaPlayer.setDataSource(context, Uri.parse(mVideoPath));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        mediaPlayer.setAudioStreamType(AudioManager.STREAM_SYSTEM);
+        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         mediaPlayer.setLooping(true);
         mediaPlayer.setOnVideoSizeChangedListener(this);
     }
@@ -149,6 +149,7 @@ public class SampleRender implements GLSurfaceView.Renderer
 
     @Override
     public void onDrawFrame(GL10 gl) {
+        Log.i(TAG, "onDrawFrame " + updateSurface);
         GLES20.glClear(GLES20.GL_DEPTH_BUFFER_BIT | GLES20.GL_COLOR_BUFFER_BIT);
         synchronized (this) {
             if (updateSurface) {
@@ -181,6 +182,7 @@ public class SampleRender implements GLSurfaceView.Renderer
     @Override
     synchronized public void onFrameAvailable(SurfaceTexture surface) {
         updateSurface = true;
+        Log.i(TAG, "onFrameAvailable " + updateSurface);
     }
 
     @Override

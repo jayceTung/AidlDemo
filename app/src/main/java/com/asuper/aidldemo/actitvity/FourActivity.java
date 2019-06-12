@@ -1,5 +1,6 @@
 package com.asuper.aidldemo.actitvity;
 
+import android.Manifest;
 import android.app.ActivityManager;
 import android.content.Intent;
 import android.text.TextUtils;
@@ -21,12 +22,19 @@ import java.util.List;
  * @date 2018-12-07
  */
 public class FourActivity extends BaseActivity {
+    private static final int MY_PERMISSIONS_REQUEST_CALL_CAMERA = 2;
 
     private LoopNewsView mLnvView;
     private MarqueeTextView mTvView;
     private Button mBtn;
     private ImageView imageView;
     private boolean isTune = true;
+
+    String[] permissions = new String[]{
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS,
+            Manifest.permission.READ_EXTERNAL_STORAGE
+    };
 
     @Override
     protected int getContentView() {
@@ -83,5 +91,7 @@ public class FourActivity extends BaseActivity {
 
         //进程优先级
         int process = ActivityManager.RunningAppProcessInfo.IMPORTANCE_BACKGROUND;
+        hasPermissions(101, () -> {}, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        hasPermissions(101, () -> {}, Manifest.permission.READ_EXTERNAL_STORAGE);
     }
 }

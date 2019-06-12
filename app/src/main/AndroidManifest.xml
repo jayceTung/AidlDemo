@@ -58,6 +58,15 @@
         <service
             android:name=".scheduler.PollService"
             android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.asuper.aidldemo.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
     </application>
 
 
@@ -76,4 +85,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
 
+    <uses-feature android:glEsVersion="0x00020000" android:required="true" />
+    <supports-gl-texture android:name="GL_OES_compressed_ETC1_RGB8_texture" />
+    <supports-gl-texture android:name="GL_OES_compressed_paletted_texture" />
 </manifest>

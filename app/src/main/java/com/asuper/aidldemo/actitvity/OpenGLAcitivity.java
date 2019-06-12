@@ -15,16 +15,21 @@ import com.asuper.aidldemo.opengl.SampleRender;
 public class OpenGLAcitivity extends AppCompatActivity {
     private static final String TAG = "GLViewMediaActivity";
     private GLSurfaceView glView;
-    public static final String videoPath = Environment.getExternalStorageDirectory().getPath() + "/Movies/早早早.mp4";
+    public static final String videoPath = Environment.getExternalStorageDirectory().getPath() + "/output.mp4";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_opengl);
+
         glView = (GLSurfaceView) findViewById(R.id.surface_view);
+
+
         glView.setEGLContextClientVersion(2);
-        SampleRender glVideoRenderer = new SampleRender(this, videoPath);
-        glView.setRenderer(glVideoRenderer);
+
+        SampleRender mSampleRender = new SampleRender(this, videoPath);
+
+        // Set the Renderer for drawing on the GLSurfaceView
+        glView.setRenderer(mSampleRender);//设置renderer
     }
 }
