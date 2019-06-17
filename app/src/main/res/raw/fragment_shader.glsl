@@ -1,10 +1,7 @@
 #extension GL_OES_EGL_image_external : require
-precision mediump float;
+precision lowp float;
 varying vec2 vTexCoord;
-uniform samplerExternalOES sTexture;
+uniform sampler2D uSample;
 void main() {
-    //gl_FragColor=texture2D(sTexture, vTexCoord);
-    vec3 centralColor = texture2D(sTexture, vTexCoord).rgb;
-    gl_FragColor = vec4(0.299*centralColor.r+0.587*centralColor.g+0.114*centralColor.b);
-
+    gl_FragColor = vec4(texture2D(uSample, vTexCoord).rgb, texture2D(uSample, vTexCoord + vec2(-0.5, 0)).r);
 }
