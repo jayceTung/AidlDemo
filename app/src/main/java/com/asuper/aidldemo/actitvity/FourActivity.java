@@ -13,6 +13,7 @@ import com.asuper.aidldemo.base.BaseActivity;
 import com.asuper.aidldemo.view.LoopNewsView;
 import com.asuper.aidldemo.view.LoopView;
 import com.asuper.aidldemo.view.MarqueeTextView;
+import com.asuper.aidldemo.view.VerticalProgressBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -93,5 +94,9 @@ public class FourActivity extends BaseActivity {
         int process = ActivityManager.RunningAppProcessInfo.IMPORTANCE_BACKGROUND;
         hasPermissions(101, () -> {}, Manifest.permission.WRITE_EXTERNAL_STORAGE);
         hasPermissions(101, () -> {}, Manifest.permission.READ_EXTERNAL_STORAGE);
+
+        VerticalProgressBar vpb = (VerticalProgressBar) findViewById(R.id.vpb_view);
+        vpb.setMaxCount(100);
+        vpb.setCurrentCount(90);
     }
 }
