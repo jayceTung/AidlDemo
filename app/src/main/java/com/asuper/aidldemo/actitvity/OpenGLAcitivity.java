@@ -6,7 +6,7 @@ import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 
 import com.asuper.aidldemo.R;
-import com.asuper.aidldemo.opengl.SampleRender;
+import com.asuper.aidldemo.opengl.TiAmoRender;
 
 /**
  * @author super
@@ -27,7 +27,7 @@ public class OpenGLAcitivity extends AppCompatActivity {
 
         glView.setEGLContextClientVersion(2);
 
-        SampleRender mSampleRender = new SampleRender(this, videoPath);
+        TiAmoRender mSampleRender = new TiAmoRender(this, videoPath);
 
         // Set the Renderer for drawing on the GLSurfaceView
         glView.setRenderer(mSampleRender);//设置renderer
