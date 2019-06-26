@@ -10,6 +10,7 @@ import android.widget.ImageView;
 
 import com.asuper.aidldemo.R;
 import com.asuper.aidldemo.base.BaseActivity;
+import com.asuper.aidldemo.view.BubbleLayout;
 import com.asuper.aidldemo.view.LoopNewsView;
 import com.asuper.aidldemo.view.LoopView;
 import com.asuper.aidldemo.view.MarqueeTextView;
@@ -98,5 +99,9 @@ public class FourActivity extends BaseActivity {
         VerticalProgressBar vpb = (VerticalProgressBar) findViewById(R.id.vpb_view);
         vpb.setMaxCount(100);
         vpb.setCurrentCount(90);
+
+        BubbleLayout mBubble = (BubbleLayout) findViewById(R.id.bubble);
+        mBubble.setData("1111111");
+        mBubble.setAlpha(0.7f);
     }
 }
