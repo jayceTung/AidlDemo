@@ -1,6 +1,7 @@
 package com.asuper.aidldemo.view;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
@@ -9,6 +10,8 @@ import android.graphics.RectF;
 import android.graphics.Shader;
 import android.util.AttributeSet;
 import android.view.View;
+
+import com.asuper.aidldemo.R;
 
 /**
  * @author super
@@ -32,18 +35,21 @@ public class VerticalProgressBar extends View {
      */
     private Paint mPaint;
     private int mWidth, mHeight;
+    private boolean isVertical = true;
 
     public VerticalProgressBar(Context context) {
-        super(context);
-    }
-
-    public VerticalProgressBar(Context context, AttributeSet attrs,
-                               int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
+        this(context, null);
     }
 
     public VerticalProgressBar(Context context, AttributeSet attrs) {
-        super(context, attrs);
+        this(context, attrs, 0);
+    }
+
+    public VerticalProgressBar(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.VerticalProgressBar);
+        isVertical = ta.getBoolean(R.styleable.VerticalProgressBar_vertical, true);
+        ta.recycle();
     }
 
     @Override
@@ -61,8 +67,20 @@ public class VerticalProgressBar extends View {
         mPaint.setStyle(Paint.Style.FILL);
         mPaint.setShadowLayer(100, 0, 0, Color.WHITE);
 
-        float section = currentCount / maxCount;
-        RectF rectProgressBg = new RectF(beginP + 3, mHeight * (1- section) + 3, mWidth -3 , mHeight - 3);
+        float section = 0;
+        if (maxCount > 0) {
+            section = currentCount / maxCount;
+        }
+        RectF rectProgressBg = null;
+        if (isVertical) {
+            rectProgressBg = new RectF(beginP + 3, mHeight * (1- section) + 3, mWidth -3 , mHeight - 3);
+        } else {
+            int temp = SECTION_COLORS[1];
+            SECTION_COLORS[1] = SECTION_COLORS[0];
+            SECTION_COLORS[0] = temp;
+
+            rectProgressBg = new RectF(beginP+3, beginP+3, (mWidth-3) * section, mHeight - 3);
+        }
         if (section <= 1.0f / 3.0f) {
             if (section != 0.0f) {
                 mPaint.setColor(SECTION_COLORS[0]);
@@ -70,21 +88,8 @@ public class VerticalProgressBar extends View {
                 mPaint.setColor(Color.TRANSPARENT);
             }
         } else {
-            int count = 2;
-            int[] colors = new int[count];
-            System.arraycopy(SECTION_COLORS, 0, colors, 0, count);
-            float[] positions = new float[count];
-            if (count == 2) {
-                positions[0] = 0.0f;
-                positions[1] = 1.0f - positions[0];
-            } else {
-                positions[0] = 0.0f;
-                positions[1] = (maxCount / 3) / currentCount;
-                positions[2] = 1.0f - positions[0] * 2;
-            }
-            positions[positions.length - 1] = 1.0f;
-            //线性渲染
-            LinearGradient shader = new LinearGradient(3, 3, (mWidth - 3) * section, mHeight - 3, colors, null, Shader.TileMode.MIRROR);
+            LinearGradient shader = new LinearGradient(3, 3, (mWidth - 3) * section, mHeight - 3, SECTION_COLORS[0], SECTION_COLORS[1], Shader.TileMode.CLAMP);
+
             mPaint.setShader(shader);
         }
         canvas.drawRoundRect(rectProgressBg, round, round, mPaint);
