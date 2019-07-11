@@ -15,6 +15,9 @@
         <activity android:name=".actitvity.OpenGLAcitivity">
         </activity>
         <activity android:name=".actitvity.FourActivity">
+        </activity>
+        <activity
+            android:name=".actitvity.MoveActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
