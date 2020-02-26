@@ -30,4 +30,12 @@
         android:layout_height="100dp"
         android:background="@color/kk_fd5b43"
         android:layout_marginLeft="350dp"/>
+
+    <com.asuper.aidldemo.view.SearchHistView
+        android:id="@+id/shv_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" />
+
+    i
 </RelativeLayout>
