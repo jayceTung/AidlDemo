@@ -267,6 +267,7 @@
     <color name="kk_me_table_bg">#08000000</color>
     <color name="kk_login_phone_shape_n">#00FDC913</color>
     <color name="kk_login_phone_shape_p">#a39f9d</color>
+    <color name="kk_ffe8cf">#FFE8CF</color>
 
     <color name="kk_login_weibo_shape_n">#E6FF6666</color>
     <color name="kk_login_weibo_shape_p">#bf4e4c</color>

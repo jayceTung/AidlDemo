@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.asuper.aidldemo.R;
 import com.asuper.aidldemo.fragment.CommentFragment;
+import com.asuper.aidldemo.view.BonusWaitView;
 import com.asuper.aidldemo.view.SearchHistView;
 
 /**
@@ -20,6 +21,8 @@ public class MoveActivity extends AppCompatActivity {
     private SearchHistView mShvView;
 
     public static String[] data = {"净水器", "手机", "电动车", "洗衣机", "沙发", "冰箱", "瓷砖", "空调", "床垫", "卫浴", "热水器", "床", "家具", "手表", "电视", "集成灶", "领带", "保温杯", "童装", "自行车", "空气净化器", "地板", "硅藻泥", "油烟机", "智能家居"};
+
+    private BonusWaitView cdvView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,6 +39,9 @@ public class MoveActivity extends AppCompatActivity {
 
         mShvView = (SearchHistView) findViewById(R.id.shv_view);
         setFlow();
+
+        cdvView = findViewById(R.id.cdv_view);
+        cdvView.start(10 * 1000);
     }
 
     public void setFlow(){
