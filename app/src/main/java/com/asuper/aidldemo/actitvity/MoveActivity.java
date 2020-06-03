@@ -5,6 +5,9 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.asuper.aidldemo.R;
@@ -23,6 +26,7 @@ public class MoveActivity extends AppCompatActivity {
     public static String[] data = {"净水器", "手机", "电动车", "洗衣机", "沙发", "冰箱", "瓷砖", "空调", "床垫", "卫浴", "热水器", "床", "家具", "手表", "电视", "集成灶", "领带", "保温杯", "童装", "自行车", "空气净化器", "地板", "硅藻泥", "油烟机", "智能家居"};
 
     private BonusWaitView cdvView;
+    private Spinner spinner;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,6 +46,20 @@ public class MoveActivity extends AppCompatActivity {
 
         cdvView = findViewById(R.id.cdv_view);
         cdvView.start(10 * 1000);
+        spinner = findViewById(R.id.spinner_simple);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, data);
+        spinner.setPrompt("请选择喜欢的颜色！");
+        spinner.setAdapter(adapter);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            }
+            //Spinner默认显示第一项
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
     }
 
     public void setFlow(){
@@ -90,4 +108,5 @@ public class MoveActivity extends AppCompatActivity {
         CommentFragment fullSheetDialogFragment = new CommentFragment();
         fullSheetDialogFragment.show(getSupportFragmentManager(),"CommentFragment");
     }
+
 }
