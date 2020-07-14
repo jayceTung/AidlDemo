@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000000"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http:/schemas.android.com/apk/res-auto">
 
     <Button
         android:id="@+id/btn_start"
@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:text="开始" />
 
-    <ImageView
+    <Image
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:src="@mipmap/bang_start_tip"/>

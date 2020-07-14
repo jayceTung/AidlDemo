@@ -3,14 +3,14 @@ package com.asuper.aidldemo.actitvity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.asuper.aidldemo.R;
+import com.asuper.aidldemo.designmode.single.ChangeInstance;
 import com.asuper.aidldemo.fragment.CommentFragment;
 import com.asuper.aidldemo.view.BonusWaitView;
 import com.asuper.aidldemo.view.SearchHistView;
@@ -46,20 +46,25 @@ public class MoveActivity extends AppCompatActivity {
 
         cdvView = findViewById(R.id.cdv_view);
         cdvView.start(10 * 1000);
-        spinner = findViewById(R.id.spinner_simple);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, data);
-        spinner.setPrompt("请选择喜欢的颜色！");
-        spinner.setAdapter(adapter);
+//        spinner = findViewById(R.id.spinner_simple);
+//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, data);
+//        spinner.setPrompt("请选择喜欢的颜色！");
+//        spinner.setAdapter(adapter);
+//
+//        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//            }
+//            //Spinner默认显示第一项
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//            }
+//        });
+        int[] position = new int[2];
+        cdvView.getLocationOnScreen(position);
+        Log.i("DMC", "getLocationOnScreen:" + position[0] + "," + position[1]);
 
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            }
-            //Spinner默认显示第一项
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
+        Log.i("DMC", ChangeInstance.getInstance().getMethod());
     }
 
     public void setFlow(){

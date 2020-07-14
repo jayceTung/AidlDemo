@@ -1,1 +1,2 @@
+include ':insertlibrary'
 include ':app'

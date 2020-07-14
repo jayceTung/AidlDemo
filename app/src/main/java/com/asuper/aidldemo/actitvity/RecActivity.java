@@ -51,7 +51,6 @@ import okhttp3.Response;
 
 public class RecActivity extends BaseActivity {
     private static final String TAG = "RecActivity";
-
     public static final int MSG_MES = 0x000001;
 
 //    private TextView mTvText;
@@ -143,6 +142,7 @@ public class RecActivity extends BaseActivity {
         view.addData(list);
 
         initView();
+
     }
 
     private void initView() {

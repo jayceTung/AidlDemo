@@ -161,4 +161,37 @@ public class KDBean {
                 ", data=" + data.toString() +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        KDBean kdBean = (KDBean) o;
+
+        if (message != null ? !message.equals(kdBean.message) : kdBean.message != null)
+            return false;
+        if (nu != null ? !nu.equals(kdBean.nu) : kdBean.nu != null) return false;
+        if (ischeck != null ? !ischeck.equals(kdBean.ischeck) : kdBean.ischeck != null)
+            return false;
+        if (condition != null ? !condition.equals(kdBean.condition) : kdBean.condition != null)
+            return false;
+        if (com != null ? !com.equals(kdBean.com) : kdBean.com != null) return false;
+        if (status != null ? !status.equals(kdBean.status) : kdBean.status != null) return false;
+        if (state != null ? !state.equals(kdBean.state) : kdBean.state != null) return false;
+        return data != null ? data.equals(kdBean.data) : kdBean.data == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = message != null ? message.hashCode() : 0;
+        result = 31 * result + (nu != null ? nu.hashCode() : 0);
+        result = 31 * result + (ischeck != null ? ischeck.hashCode() : 0);
+        result = 31 * result + (condition != null ? condition.hashCode() : 0);
+        result = 31 * result + (com != null ? com.hashCode() : 0);
+        result = 31 * result + (status != null ? status.hashCode() : 0);
+        result = 31 * result + (state != null ? state.hashCode() : 0);
+        result = 31 * result + (data != null ? data.hashCode() : 0);
+        return result;
+    }
 }
