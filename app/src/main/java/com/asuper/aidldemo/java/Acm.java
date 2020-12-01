@@ -14,9 +14,11 @@ public class Acm {
         CyclicBarrier barrier = new CyclicBarrier(10);
         String str = "/original.png";
         int i = str.lastIndexOf("/");
-        System.out.println(checkNum("派送中。小哥今日体温正常，将佩戴口罩为您配送，也可联系小哥将包裹放置指定地点，祝您身体健康。,派送人：毛建军,电话:17337678901"));
+        System.out.println(checkNum("派送中13幢1单元小哥今日体温正常，将佩戴口罩为您配送，也可联系小哥将包裹放置指定地点，祝您身体健康。,派送人：毛建军,电话:"));
+        System.out.println(barrier.hashCode());
 //        System.out.println(checkNum("派送中。小哥今日体温正常，将佩戴口罩为您配送，也可联系小哥将包裹放置指定地点，祝您身体健康。,派送人：毛建军,电话:15990010346"));
     }
+
     public static String checkNum(String num){
         Pattern pattern = Pattern.compile("((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(17[013678])|(18[0,5-9]))\\d{8}$*");
         Matcher matcher = pattern.matcher(num);
@@ -29,6 +31,23 @@ public class Acm {
             bf.deleteCharAt(len - 1);
         }
         return bf.toString();
+    }
+
+    class Solution {
+        public boolean findNumberIn2DArray(int[][] matrix, int target) {
+            if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
+                return false;
+            }
+            int rows = matrix.length, columns = matrix[0].length;
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < columns; j++) {
+                    if (matrix[i][j] == target) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
     }
 
 }

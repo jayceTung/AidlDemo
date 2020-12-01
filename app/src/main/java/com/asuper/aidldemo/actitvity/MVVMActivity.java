@@ -1,6 +1,7 @@
 package com.asuper.aidldemo.actitvity;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
 import com.asuper.aidldemo.R;
 import com.asuper.aidldemo.bean.OrderLogisticsBean;
@@ -16,6 +17,7 @@ import com.asuper.aidldemo.view.LogisticsView;
 public class MVVMActivity extends BaseActivity {
     private ActivityMvvmBinding binding;
     private MVVMViewModel mvvmViewModel;
+    private int num;
 
 //    @Override
 //    protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +36,8 @@ public class MVVMActivity extends BaseActivity {
         setContentView(R.layout.activity_logistics);
         logisticsView = findViewById(R.id.logisticsView);
         logisticsView.setLogisticsAdapter(intData());
-
+        TextView textView = findViewById(R.id.tv_txt);
+        textView.setText(getResources().getString(R.string.kk_txt, num));
     }
 
     private OrderLogisticsBean intData() {

@@ -5,4 +5,5 @@
     <string name="last_update">上次更新  <xliff:g>%s</xliff:g></string>
     <string name="kk_refreshing">正在刷新...</string>
     <string name="kk_window_toast">在直播间摔倒了要你的亲亲才能起来</string>
+    <string name="kk_txt">附近的是放假按时到了<xliff:g>%s</xliff:g></string>
 </resources>
