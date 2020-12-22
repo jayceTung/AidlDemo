@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -47,6 +48,8 @@ public class MemberListView extends LinearLayout {
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mAdapter = new MemberAdapter();
         mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setViewCacheExtension(new MyViewCacheExtension());
+        mRecyclerView.setViewCacheExtension(new MyViewCacheExtension());
     }
 
     private void initView() {
@@ -77,5 +80,14 @@ public class MemberListView extends LinearLayout {
                 break;
         }
         return super.dispatchTouchEvent(ev);
+    }
+
+    class MyViewCacheExtension extends RecyclerView.ViewCacheExtension {
+
+        @Override
+        public View getViewForPositionAndType(RecyclerView.Recycler recycler, int position, int type) {
+//            return viewType == DemoAdapter.TYPE_SPECIAL ? mAdapter.caches.get(position) : null;
+            return null;
+        }
     }
 }

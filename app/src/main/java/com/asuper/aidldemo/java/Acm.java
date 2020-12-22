@@ -1,6 +1,8 @@
 package com.asuper.aidldemo.java;
 
+import java.util.TreeMap;
 import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -9,6 +11,7 @@ import java.util.regex.Pattern;
  * @date 2020/10/20
  */
 public class Acm {
+
     public static void main(String[] args) {
         int[] nums = new int[0];
         CyclicBarrier barrier = new CyclicBarrier(10);
@@ -17,6 +20,15 @@ public class Acm {
         System.out.println(checkNum("派送中13幢1单元小哥今日体温正常，将佩戴口罩为您配送，也可联系小哥将包裹放置指定地点，祝您身体健康。,派送人：毛建军,电话:"));
         System.out.println(barrier.hashCode());
 //        System.out.println(checkNum("派送中。小哥今日体温正常，将佩戴口罩为您配送，也可联系小哥将包裹放置指定地点，祝您身体健康。,派送人：毛建军,电话:15990010346"));
+
+        TreeMap<Integer, String> pairs = new TreeMap<>();
+        pairs.put(2,  "B");
+
+        pairs.put(1,  "A");
+
+        pairs.put(3,  "C");
+        pairs.ceilingEntry(3);
+
     }
 
     public static String checkNum(String num){
@@ -50,4 +62,19 @@ public class Acm {
         }
     }
 
+    class Node {
+        private int prv;
+        int next;
+        Thread thread;
+
+
+    }
+
+
+
+    static class Entry {
+        Entry left;
+        Entry right;
+        Entry parent;
+    }
 }
