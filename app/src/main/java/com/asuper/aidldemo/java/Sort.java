@@ -1,5 +1,9 @@
 package com.asuper.aidldemo.java;
 
+import android.os.Looper;
+
+import com.asuper.aidldemo.collection.TreeNode;
+
 import java.io.FileNotFoundException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -13,7 +17,8 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by Super on 2016/9/8.
  */
-public class Sort {
+public class Sort implements Runnable{
+    private static int i = 0;
 
     public static void main(String[] args) {
         User user1 = new User();
@@ -86,7 +91,7 @@ public class Sort {
         System.out.println(f);
 
         List<String> list2 = new ArrayList<>();
-        String s = list2.remove(0);
+//        String s = list2.remove(0);
         MyProcess process = new MyProcess(new Tiger());
         ((Animal)process.getProxy()).eat();
         try {
@@ -95,6 +100,18 @@ public class Sort {
             e.printStackTrace();
         }
 
+
+
+        Thread thread1 = new Thread(new Sort());
+        Thread thread2 = new Thread(new Sort());
+        Thread thread3 = new Thread(new Sort());
+        thread1.setName("0");
+        thread2.setName("1");
+        thread3.setName("2");
+
+        thread1.start();
+        thread2.start();
+        thread3.start();
     }
 
     static String getString(){
@@ -115,5 +132,30 @@ public class Sort {
 
     public synchronized void set() {
 
+    }
+
+
+    /**
+     * 对象锁不同对象互不干扰
+     * class对象只有一个 所以类锁会影响全部
+     */
+    @Override
+    public void run() {
+        while (i <= 100) {
+            synchronized (Sort.class) {
+                Integer integer = new Integer(Thread.currentThread().getName());
+                if (i % 3 == integer) {
+                    System.out.println("thread " + Thread.currentThread().getName() + "----------------" + i);
+                    i++;
+                    Sort.class.notifyAll();
+                } else {
+                    try {
+                        Sort.class.wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
     }
 }
