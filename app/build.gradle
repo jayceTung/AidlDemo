@@ -1,11 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'com.antfortune.freeline'
-apply plugin: 'com.android.application'
-//添加如下代码，应用apt插件
-//apply plugin: 'com.neenbedankt.android-apt'
-//apply from: 'tinkerpatch.gradle'
-apply plugin: 'me.tatarka.retrolambda'
+
 
 android {
     compileSdkVersion 28
@@ -52,9 +47,6 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     testImplementation 'junit:junit:4.12'
 
-    debugImplementation 'com.antfortune.freeline:runtime:0.8.1'
-    releaseImplementation 'com.antfortune.freeline:runtime-no-op:0.8.1'
-    testImplementation 'com.antfortune.freeline:runtime-no-op:0.8.1'
     implementation 'com.android.support:support-annotations:25.4.0'
     implementation 'com.android.support:appcompat-v7:25.4.0'
     implementation 'com.mcxiaoke.volley:library:1.0.15'

@@ -16,8 +16,7 @@ import com.asuper.aidldemo.view.LogisticsView;
  */
 public class MVVMActivity extends BaseActivity {
     private ActivityMvvmBinding binding;
-    private MVVMViewModel mvvmViewModel;
-    private int num;
+    private MVVMViewModel mvvmViewModel;private int num;
 
 //    @Override
 //    protected void onCreate(Bundle savedInstanceState) {

@@ -4,7 +4,6 @@ import android.app.Application;
 import android.content.Context;
 import android.util.Log;
 
-import com.antfortune.freeline.FreelineCore;
 import com.od.core.rest.NetParams;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
@@ -37,8 +36,6 @@ public class App extends Application {
         //traceview 分析方法调用次数
 //        Debug.startMethodTracing("DMC_Trace");
 //        Debug.stopMethodTracing();
-
-        FreelineCore.init(this);
 
 //        if (BuildConfig.DEBUG) {
 //            //针对线程策略1
