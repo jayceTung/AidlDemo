@@ -36,4 +36,8 @@
     <declare-styleable name="VerticalProgressBar">
         <attr name="vertical" format="boolean"/>
     </declare-styleable>
+
+    <declare-styleable name="MultiShapeView">
+        <attr name="mv_radius" format="integer" />
+    </declare-styleable>
 </resources>

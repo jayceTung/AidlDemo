@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/kk_ffffff">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:customshape="http://schemas.android.com/tools"
+        android:background="@color/kk_custom_dialog_btn_stake_color"
+        android:orientation="vertical">
 
     <com.asuper.aidldemo.view.LogisticsView
         android:id="@+id/logisticsView"
@@ -20,4 +22,13 @@
         android:textColor="@color/kk_999999"
         android:layout_gravity="center"/>
 
+
+    <com.asuper.aidldemo.view.MultiShapeView
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_marginLeft="28dp"
+            android:layout_marginTop="44dp"
+            app:mv_radius="30"
+            android:scaleType="centerInside"
+            android:src="@drawable/default_album"/>
 </LinearLayout>
