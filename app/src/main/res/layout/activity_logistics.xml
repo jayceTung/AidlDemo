@@ -24,11 +24,11 @@
 
 
     <com.asuper.aidldemo.view.MultiShapeView
-            android:layout_width="300dp"
-            android:layout_height="300dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginLeft="28dp"
             android:layout_marginTop="44dp"
-            app:mv_radius="30"
+            app:mv_radius="6"
             android:scaleType="centerInside"
             android:src="@drawable/default_album"/>
 </LinearLayout>

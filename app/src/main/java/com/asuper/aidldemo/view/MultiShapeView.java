@@ -110,14 +110,14 @@ public class MultiShapeView extends ImageView {
 
     // 将Bitmap合成为一个圆角的Bitmap
     public Bitmap getRoundConerBitmap(Bitmap bitmap, int round) {
-        Bitmap b = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(),
+        Bitmap b = Bitmap.createBitmap(getWidth(), getHeight(),
                 Config.ARGB_8888);
         Paint p = new Paint();
         p.setAntiAlias(true);
         p.setColor(Color.WHITE);
         Canvas canvas = new Canvas(b);
         // 在底层画一个矩形
-        RectF rect = new RectF(0, 0, bitmap.getWidth(), bitmap.getHeight());
+        RectF rect = new RectF(0, 0, getWidth(), getHeight());
         canvas.drawRoundRect(rect, round, round, p);
         p.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
         // 设置SRC_IN模式，这种模式取两层图片叠加的并集 展现上面的那一层
