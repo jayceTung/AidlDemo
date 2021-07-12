@@ -6,14 +6,17 @@ import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
-import android.widget.ImageView;
+import android.util.Log;
 import com.asuper.aidldemo.R;
 import com.asuper.aidldemo.util.Util;
 
@@ -22,7 +25,7 @@ import com.asuper.aidldemo.util.Util;
  * @brief description
  * @date 2021-07-01
  */
-public class MultiShapeView extends ImageView {
+public class MultiShapeView extends AppCompatImageView {
     public static final int circle = 0;
     public static final int round = 1;
     Paint paint = new Paint();
@@ -88,7 +91,12 @@ public class MultiShapeView extends ImageView {
             Bitmap b = getCircleBitmap(bitmap, r);
             canvas.drawBitmap(b, left, top, paint);
         } else if (round == type) {
-            Bitmap b = getRoundConerBitmap(bitmap, radius);
+            float scaleWidth = ((float) getWidth()) / w;
+            float scaleHeight = ((float) getHeight()) / h;
+            Matrix matrix = new Matrix();
+            matrix.postScale(scaleWidth, scaleHeight);
+            bitmap = Bitmap.createBitmap(bitmap, 0, 0, w, h, matrix, true);
+            Bitmap b = getRoundCorner(bitmap, radius);
             canvas.drawBitmap(b, 0, 0, paint);
         }
     }
@@ -108,20 +116,18 @@ public class MultiShapeView extends ImageView {
         return b;
     }
 
-    // 将Bitmap合成为一个圆角的Bitmap
-    public Bitmap getRoundConerBitmap(Bitmap bitmap, int round) {
-        Bitmap b = Bitmap.createBitmap(getWidth(), getHeight(),
-                Config.ARGB_8888);
-        Paint p = new Paint();
-        p.setAntiAlias(true);
-        p.setColor(Color.WHITE);
-        Canvas canvas = new Canvas(b);
-        // 在底层画一个矩形
-        RectF rect = new RectF(0, 0, getWidth(), getHeight());
-        canvas.drawRoundRect(rect, round, round, p);
-        p.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
-        // 设置SRC_IN模式，这种模式取两层图片叠加的并集 展现上面的那一层
-        canvas.drawBitmap(bitmap, 0, 0, p);
-        return b;
+    public Bitmap getRoundCorner(Bitmap bitmap, int round) {
+        Bitmap output = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(output);
+        final Paint paint = new Paint();
+        final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
+        final RectF rectF = new RectF(rect);
+        paint.setAntiAlias(true);
+        canvas.drawARGB(0, 0, 0, 0);
+        paint.setColor(Color.WHITE);
+        canvas.drawRoundRect(rectF, round, round, paint);
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+        canvas.drawBitmap(bitmap, rect, rect, paint);
+        return output;
     }
 }

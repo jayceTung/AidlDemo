@@ -24,11 +24,10 @@
 
 
     <com.asuper.aidldemo.view.MultiShapeView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:layout_marginLeft="28dp"
             android:layout_marginTop="44dp"
-            app:mv_radius="6"
-            android:scaleType="centerInside"
-            android:src="@drawable/default_album"/>
+            app:mv_radius="3"
+            android:src="@mipmap/kk_live_room_bg_4"/>
 </LinearLayout>
