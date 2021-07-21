@@ -7,6 +7,7 @@ import android.util.Log;
 import com.od.core.rest.NetParams;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
+import com.tencent.mmkv.MMKV;
 
 /**
  * Created by Super on 2016/11/10.
@@ -62,6 +63,9 @@ public class App extends Application {
 
         refWatcher = LeakCanary.install(this);
         MyCrashHandler.getInstance().init(this);
+
+        String rootDir = MMKV.initialize(this);
+        System.out.println("mmkv root: " + rootDir);
     }
 
     @Override
