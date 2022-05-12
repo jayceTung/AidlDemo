@@ -1,78 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.asuper.aidldemo"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.asuper.aidldemo">
 
     <application
         android:name="App"
         android:allowBackup="true"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="aidl"
         android:supportsRtl="true"
-        android:hardwareAccelerated="true"
         android:theme="@style/Theme.AppCompat.NoActionBar"
         tools:replace="android:theme, android:label,android:allowBackup">
-        <activity android:name=".actitvity.OpenGLAcitivity">
-        </activity>
-        <activity android:name=".actitvity.FourActivity">
+        <activity android:name=".actitvity.OpenGLAcitivity"></activity>
+        <activity android:name=".actitvity.FourActivity"></activity>
+        <activity android:name=".actitvity.MoveActivity"></activity>
+        <activity android:name=".kotiln.MainActivity"></activity>
+
+        <activity
+            android:name=".actitvity.RecActivity"
+            android:launchMode="singleTask"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
-            android:name=".actitvity.MoveActivity">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN"/>-->
-<!--                <category android:name="android.intent.category.LAUNCHER"/>-->
-<!--            </intent-filter>-->
-        </activity>
+            android:name=".view.TriActivity"
+            android:screenOrientation="portrait" />
+
         <activity
-            android:name=".kotiln.MainActivity">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN"/>-->
-                <!--<category android:name="android.intent.category.LAUNCHER"/>-->
-            <!--</intent-filter>-->
-        </activity>
-
-        <activity android:name=".actitvity.RecActivity"
-                  android:launchMode="singleTask">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN"/>-->
-                <!--<category android:name="android.intent.category.LAUNCHER"/>-->
-            <!--</intent-filter>-->
-        </activity>
-        <activity android:name=".view.TriActivity"
-                  android:screenOrientation="portrait"/>
-
-        <activity android:name=".actitvity.ToolBarActivity"
-                  android:screenOrientation="portrait"/>
+            android:name=".actitvity.ToolBarActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".actitvity.MVVMActivity"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
 
-        <service android:name=".MyService"
-                 android:process=":remote">
-            <intent-filter>
-                <action android:name="com.asuper.aidldemo.MyService"></action>
-            </intent-filter>
+        <service
+            android:name=".MyService"
+            android:process=":remote">
         </service>
 
-        <service android:name=".service.InnerService"/>
+        <service android:name=".service.InnerService" />
 
         <meta-data
             android:name="TINKER_ID"
             android:value="tinker_id_100" />
-        <service android:name=".music.MusicService"/>
+
+        <service android:name=".music.MusicService" />
 
         <service
             android:name=".scheduler.PollService"
-            android:permission="android.permission.BIND_JOB_SERVICE"/>
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
         <provider
-            android:name="android.support.v4.content.FileProvider"
+            android:name="androidx.core.content.FileProvider"
             android:authorities="com.asuper.aidldemo.fileprovider"
-            android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
@@ -82,21 +67,25 @@
 
 
     <!-- 挂载/卸载sd卡权限 -->
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
+    <uses-permission
+        android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
         tools:ignore="ProtectedPermissions" />
     <!-- 写入外设的权限 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!-- 网络权限 -->
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
-    <uses-feature android:glEsVersion="0x00020000" android:required="true" />
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+
     <supports-gl-texture android:name="GL_OES_compressed_ETC1_RGB8_texture" />
     <supports-gl-texture android:name="GL_OES_compressed_paletted_texture" />
 </manifest>

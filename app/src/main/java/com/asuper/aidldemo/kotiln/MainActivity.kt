@@ -1,8 +1,8 @@
 package com.asuper.aidldemo.kotiln
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
 import com.asuper.aidldemo.kotiln.MainActivity.Companion.req_btn
 import org.jetbrains.anko.*
 

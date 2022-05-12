@@ -6,11 +6,12 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.NotificationCompat;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+
+import androidx.core.app.NotificationCompat;
 
 import com.asuper.aidldemo.R;
 
@@ -26,13 +27,9 @@ public class TriActivity extends BaseActivity implements OnClickListener{
 	private Button btn_clear;
 	private Button btn_clear_all;
 	private Button btn_show_custom;
-	/** �����ת��ָ���Ľ��� */
 	private Button btn_show_intent_act;
-	/** �����ָ���Ľ�apk */
 	private Button btn_show_intent_apk;
-	/** Notification������ */
 	NotificationCompat.Builder mBuilder;
-	/** Notification��ID */
 	int notifyId = 100;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

@@ -2,15 +2,12 @@ package com.asuper.aidldemo.music;
 
 import android.content.Context;
 
-import com.tencent.mm.opensdk.openapi.IWXAPI;
-
 /**
  * @author super
  * @date 2017/12/28
  */
 public class Wechatshare {
     private Context mContext;
-    private IWXAPI api;
 
 //    public void share () {
 //        WXMusicObject music = new WXMusicObject();

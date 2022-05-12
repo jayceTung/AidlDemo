@@ -3,12 +3,13 @@ package com.asuper.aidldemo.view.waitivew;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.RectF;
-import android.support.annotation.ColorInt;
-import android.support.annotation.Dimension;
-import android.support.annotation.IntRange;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.Dimension;
+import androidx.annotation.IntRange;
 
 import com.asuper.aidldemo.R;
 

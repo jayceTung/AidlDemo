@@ -3,7 +3,7 @@ package com.asuper.aidldemo.actitvity;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.asuper.aidldemo.R;
 import com.asuper.aidldemo.opengl.TiAmoRender;

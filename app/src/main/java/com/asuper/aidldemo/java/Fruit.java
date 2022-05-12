@@ -1,6 +1,6 @@
 package com.asuper.aidldemo.java;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 /**
  * @author super

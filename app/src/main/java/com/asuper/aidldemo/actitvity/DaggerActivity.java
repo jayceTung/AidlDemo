@@ -1,13 +1,12 @@
 package com.asuper.aidldemo.actitvity;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.asuper.aidldemo.R;
-import com.asuper.aidldemo.dagger.DaggerGetComponent;
 import com.asuper.aidldemo.dagger.DaggerModule;
 import com.asuper.aidldemo.dagger.DaggerPresenter;
 import com.asuper.aidldemo.dagger.DaggerView;
@@ -35,8 +34,8 @@ public class DaggerActivity extends BaseActivity implements DaggerView{
         mTvName = (TextView) this.findViewById(R.id.tv_name);
         mBtn = (Button) this.findViewById(R.id.btn_name);
 
-        GetComponent get = DaggerGetComponent.builder().daggerModule(new DaggerModule(this)).build();
-        get.inject(this);
+//        GetComponent get = DaggerGetComponent.builder().daggerModule(new DaggerModule(this)).build();
+//        get.inject(this);
 
         mBtn.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -3,10 +3,11 @@ package com.asuper.aidldemo.view.waitivew;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
-import android.support.annotation.ColorInt;
-import android.support.annotation.Dimension;
-import android.support.annotation.IntRange;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.Dimension;
+import androidx.annotation.IntRange;
+import androidx.annotation.NonNull;
 import android.view.View;
 
 /**
@@ -16,8 +17,10 @@ import android.view.View;
 public class WaitView extends View {
     private static final String TAG = "WaitView";
 
-    @ColorInt private int mColor;
-    @Dimension private int mRadius;
+    @ColorInt
+    private int mColor;
+    @Dimension
+    private int mRadius;
     @IntRange(from = 0, to = 255) private int mAlpha;
     private RectF mRecF;
 

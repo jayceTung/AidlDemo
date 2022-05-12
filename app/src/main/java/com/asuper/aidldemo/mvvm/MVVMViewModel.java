@@ -1,11 +1,11 @@
 package com.asuper.aidldemo.mvvm;
 
 import android.app.Application;
-import android.databinding.BaseObservable;
-import android.databinding.Bindable;
+import androidx.databinding.BaseObservable;
+import androidx.databinding.Bindable;
+
 import android.view.View;
 
-import com.asuper.aidldemo.BR;
 import com.asuper.aidldemo.databinding.ActivityMvvmBinding;
 
 /**
@@ -26,7 +26,6 @@ public class MVVMViewModel extends BaseObservable {
 
     public void setResult(String result) {
         this.result = result;
-        notifyPropertyChanged(BR.result);
     }
 
     //    一般需要传入Application对象，方便在ViewModel中使用application
